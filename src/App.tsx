@@ -287,6 +287,8 @@ export default function App() {
             setArte={setArte}
             talleres={talleres}
             setTalleres={setTalleres}
+            registrosMuseo={registrosMuseo}
+            setRegistrosMuseo={setRegistrosMuseo}
             onResetAll={resetAll}
           />
         )}

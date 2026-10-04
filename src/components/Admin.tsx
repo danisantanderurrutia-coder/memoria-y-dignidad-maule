@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import {
   Plus, Pencil, Trash2, Check, X, MapPin, FileText, MessageSquare, Inbox, RotateCcw,
-  Sparkles, Palette, BookOpenCheck,
+  Sparkles, Palette, BookOpenCheck, Landmark, Download, Upload,
 } from 'lucide-react';
 import {
   Aporte, Articulo, Comentario, Sitio, Epoca, Provincia, TipoSitio,
   HistoriaSueno, ObraArte, TallerComunitario, CategoriaSueno, CategoriaArte, NivelTaller,
+  RegistroMuseo, CategoriaMuseo,
 } from '../types';
 import { EPOCAS, PROVINCIAS, TIPOS, fmtFecha, uid } from '../lib/meta';
 import Modal from './Modal';
@@ -18,15 +19,17 @@ interface Props {
   suenos: HistoriaSueno[]; setSuenos: React.Dispatch<React.SetStateAction<HistoriaSueno[]>>;
   arte: ObraArte[]; setArte: React.Dispatch<React.SetStateAction<ObraArte[]>>;
   talleres: TallerComunitario[]; setTalleres: React.Dispatch<React.SetStateAction<TallerComunitario[]>>;
+  registrosMuseo: RegistroMuseo[]; setRegistrosMuseo: React.Dispatch<React.SetStateAction<RegistroMuseo[]>>;
   onResetAll: () => void;
 }
 
-type Tab = 'comentarios' | 'sitios' | 'articulos' | 'suenos' | 'arte' | 'talleres' | 'aportes';
+type Tab = 'comentarios' | 'sitios' | 'articulos' | 'museo' | 'suenos' | 'arte' | 'talleres' | 'aportes';
 
 export default function Admin(p: Props) {
   const [tab, setTab] = useState<Tab>('comentarios');
   const [editSitio, setEditSitio] = useState<Sitio | null>(null);
   const [editArt, setEditArt] = useState<Articulo | null>(null);
+  const [editMuseo, setEditMuseo] = useState<RegistroMuseo | null>(null);
   const [editSueno, setEditSueno] = useState<HistoriaSueno | null>(null);
   const [editArte, setEditArte] = useState<ObraArte | null>(null);
   const [editTaller, setEditTaller] = useState<TallerComunitario | null>(null);
@@ -34,10 +37,56 @@ export default function Admin(p: Props) {
   const pend = p.comentarios.filter((c) => c.estado === 'pendiente').length;
   const nuevosAportes = p.aportes.filter((a) => !a.revisado).length;
 
+  const exportBackup = () => {
+    const backup = {
+      timestamp: new Date().toISOString(),
+      sitios: p.sitios,
+      articulos: p.articulos,
+      comentarios: p.comentarios,
+      aportes: p.aportes,
+      registrosMuseo: p.registrosMuseo,
+      suenos: p.suenos,
+      arte: p.arte,
+      talleres: p.talleres,
+    };
+    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `memoria-dignidad-maule-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const importBackup = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const data = JSON.parse(ev.target?.result as string);
+        if (data.sitios) p.setSitios(data.sitios);
+        if (data.articulos) p.setArticulos(data.articulos);
+        if (data.comentarios) p.setComentarios(data.comentarios);
+        if (data.aportes) p.setAportes(data.aportes);
+        if (data.registrosMuseo) p.setRegistrosMuseo(data.registrosMuseo);
+        if (data.suenos) p.setSuenos(data.suenos);
+        if (data.arte) p.setArte(data.arte);
+        if (data.talleres) p.setTalleres(data.talleres);
+        alert('¡Copia de seguridad restaurada con éxito!');
+      } catch (err) {
+        alert('Error al leer el archivo JSON de copia de seguridad.');
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  };
+
   const tabs: { id: Tab; label: string; icon: typeof MapPin; badge?: number }[] = [
     { id: 'comentarios', label: 'Moderación', icon: MessageSquare, badge: pend },
     { id: 'sitios', label: 'Sitios', icon: MapPin },
     { id: 'articulos', label: 'Artículos', icon: FileText },
+    { id: 'museo', label: 'Museo Digital', icon: Landmark },
     { id: 'suenos', label: 'Sueños & Oficios', icon: Sparkles },
     { id: 'arte', label: 'Arte & Cultura', icon: Palette },
     { id: 'talleres', label: 'Talleres', icon: BookOpenCheck },
@@ -51,12 +100,21 @@ export default function Admin(p: Props) {
           <h1 className="font-serif text-3xl font-semibold text-zinc-50">Panel de administración</h1>
           <p className="text-xs text-zinc-400 mt-1">Gestión integral de sitios, artículos, cultura comunitaria y moderación.</p>
         </div>
-        <button
-          className="btn-danger text-xs"
-          onClick={() => confirm('¿Restablecer todos los datos a los valores iniciales? Se perderán los cambios locales.') && p.onResetAll()}
-        >
-          <RotateCcw size={14} /> Restablecer datos iniciales
-        </button>
+        <div className="flex flex-wrap gap-2">
+          <button className="btn-ghost text-xs" onClick={exportBackup} title="Descargar copia de seguridad JSON">
+            <Download size={14} /> Exportar respaldo
+          </button>
+          <label className="btn-ghost cursor-pointer text-xs" title="Restaurar desde archivo JSON">
+            <Upload size={14} /> Importar respaldo
+            <input type="file" accept="application/json" className="sr-only" onChange={importBackup} />
+          </label>
+          <button
+            className="btn-danger text-xs"
+            onClick={() => confirm('¿Restablecer todos los datos a los valores iniciales? Se perderán los cambios locales.') && p.onResetAll()}
+          >
+            <RotateCcw size={14} /> Restablecer datos iniciales
+          </button>
+        </div>
       </div>
 
       {/* Tabs */}
@@ -121,6 +179,27 @@ export default function Admin(p: Props) {
                     (p.setArticulos((x) => x.filter((y) => y.id !== a.id)),
                     p.setComentarios((c) => c.filter((y) => y.articuloId !== a.id)))
                   }
+                />
+              ))}
+            </ul>
+          </>
+        )}
+
+        {/* TAB: MUSEO DIGITAL */}
+        {tab === 'museo' && (
+          <>
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-xs text-zinc-400">{p.registrosMuseo.length} registros del museo</span>
+              <button className="btn-primary" onClick={() => setEditMuseo(nuevoMuseo())}><Plus size={16} /> Nuevo registro</button>
+            </div>
+            <ul className="space-y-2">
+              {p.registrosMuseo.map((r) => (
+                <Row
+                  key={r.id}
+                  title={r.titulo}
+                  sub={`${r.categoria} · ${r.tipo} · ${r.lugar} (${r.anio})`}
+                  onEdit={() => setEditMuseo(r)}
+                  onDelete={() => confirm(`¿Eliminar «${r.titulo}»?`) && p.setRegistrosMuseo((x) => x.filter((y) => y.id !== r.id))}
                 />
               ))}
             </ul>
@@ -248,6 +327,18 @@ export default function Admin(p: Props) {
           onSave={(a) => {
             p.setArticulos((x) => (x.some((y) => y.id === a.id) ? x.map((y) => (y.id === a.id ? a : y)) : [a, ...x]));
             setEditArt(null);
+          }}
+        />
+      )}
+
+      {editMuseo && (
+        <MuseoForm
+          inicial={editMuseo}
+          existe={p.registrosMuseo.some((r) => r.id === editMuseo.id)}
+          onClose={() => setEditMuseo(null)}
+          onSave={(r) => {
+            p.setRegistrosMuseo((x) => (x.some((y) => y.id === r.id) ? x.map((y) => (y.id === r.id ? r : y)) : [r, ...x]));
+            setEditMuseo(null);
           }}
         />
       )}
@@ -676,6 +767,61 @@ function TallerForm({ inicial, existe, onSave, onClose }: { inicial: TallerComun
         <Field label="Materiales (separados por coma)" id="tl-m"><input id="tl-m" required className="input" value={t.materialesTxt} onChange={set('materialesTxt')} /></Field>
         <Field label="Recomendaciones éticas y pedagógicas (una por línea)" id="tl-c"><textarea id="tl-c" className="input min-h-20" value={t.consejosTxt} onChange={set('consejosTxt')} /></Field>
         <div className="flex justify-end gap-2 pt-2"><button type="button" className="btn-ghost" onClick={onClose}>Cancelar</button><button className="btn-primary" type="submit">Guardar taller</button></div>
+      </form>
+    </Modal>
+  );
+}
+
+const nuevoMuseo = (): RegistroMuseo => ({
+  id: uid('museo'),
+  titulo: '',
+  categoria: 'Lugares',
+  tipo: 'foto',
+  mediaUrl: '',
+  fuenteUrl: '',
+  credito: '',
+  anio: '',
+  lugar: '',
+  relato: '',
+  audioUrl: '',
+});
+
+// -------------------------------------------------------------
+// FORMULARIO: MUSEO DIGITAL
+// -------------------------------------------------------------
+function MuseoForm({ inicial, existe, onSave, onClose }: { inicial: RegistroMuseo; existe: boolean; onSave: (r: RegistroMuseo) => void; onClose: () => void }) {
+  const [r, setR] = useState(inicial);
+  const set = (k: keyof RegistroMuseo) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    setR({ ...r, [k]: e.target.value });
+
+  return (
+    <Modal title={existe ? 'Editar registro del museo' : 'Nuevo registro del museo'} onClose={onClose}>
+      <form onSubmit={(e) => { e.preventDefault(); onSave(r); }} className="space-y-3">
+        <Field label="Título" id="mu-t"><input id="mu-t" required className="input" value={r.titulo} onChange={set('titulo')} /></Field>
+        <div className="grid grid-cols-2 gap-3">
+          <Field label="Categoría" id="mu-c">
+            <select id="mu-c" className="input" value={r.categoria} onChange={(e) => setR({ ...r, categoria: e.target.value as CategoriaMuseo })}>
+              {['Lugares', 'Momentos', 'Acciones', 'Documentos', 'Prensa'].map((c) => <option key={c}>{c}</option>)}
+            </select>
+          </Field>
+          <Field label="Tipo de medio" id="mu-ti">
+            <select id="mu-ti" className="input" value={r.tipo} onChange={(e) => setR({ ...r, tipo: e.target.value as RegistroMuseo['tipo'] })}>
+              {['foto', 'video', 'documento', 'prensa'].map((c) => <option key={c}>{c}</option>)}
+            </select>
+          </Field>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <Field label="Lugar" id="mu-l"><input id="mu-l" required className="input" value={r.lugar} onChange={set('lugar')} /></Field>
+          <Field label="Año" id="mu-a"><input id="mu-a" required className="input" value={r.anio} onChange={set('anio')} /></Field>
+        </div>
+        <Field label="URL del medio (imagen, video o YouTube)" id="mu-m"><input id="mu-m" required className="input" value={r.mediaUrl} onChange={set('mediaUrl')} placeholder="https://..." /></Field>
+        <Field label="Relato" id="mu-r"><textarea id="mu-r" required className="input min-h-24" value={r.relato} onChange={set('relato')} /></Field>
+        <div className="grid grid-cols-2 gap-3">
+          <Field label="Crédito / autoría" id="mu-cr"><input id="mu-cr" className="input" value={r.credito} onChange={set('credito')} /></Field>
+          <Field label="URL ficha original" id="mu-f"><input id="mu-f" className="input" value={r.fuenteUrl} onChange={set('fuenteUrl')} /></Field>
+        </div>
+        <Field label="URL audio (opcional)" id="mu-au"><input id="mu-au" className="input" value={r.audioUrl} onChange={set('audioUrl')} /></Field>
+        <div className="flex justify-end gap-2 pt-2"><button type="button" className="btn-ghost" onClick={onClose}>Cancelar</button><button className="btn-primary" type="submit">Guardar registro</button></div>
       </form>
     </Modal>
   );
