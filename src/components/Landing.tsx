@@ -4,10 +4,12 @@ import { EPOCAS } from '../lib/meta';
 type Dest = 'museo' | 'mapa' | 'suenos' | 'arte' | 'talleres' | 'biblioteca' | 'blog' | 'aporte';
 
 export default function Landing({ go }: { go: (v: Dest) => void }) {
+  const logoUrl = `${import.meta.env.BASE_URL}logo.svg`;
+
   return (
     <div className="mx-auto flex min-h-full max-w-6xl flex-col items-center px-4 py-12 text-center">
       <img
-        src="/logo.svg"
+        src={logoUrl}
         alt="Logo de Memoria y Dignidad Maule: sol terracota sobre la cordillera"
         width={128}
         height={128}

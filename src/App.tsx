@@ -149,7 +149,7 @@ export default function App() {
             aria-label="Ir al inicio de Memoria y Dignidad Maule"
           >
             <img
-              src="/logo.svg"
+              src={`${import.meta.env.BASE_URL}logo.svg`}
               alt="Logo Memoria y Dignidad Maule"
               className="h-12 w-12 sm:h-14 sm:w-14 drop-shadow-sm transition-transform group-hover:scale-105"
             />
