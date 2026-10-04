@@ -1,10 +1,19 @@
 import { ArrowRight, Library, Newspaper, HandHeart, Landmark, Sparkles, Palette, BookOpenCheck } from 'lucide-react';
 import { EPOCAS } from '../lib/meta';
+import { useLanguage } from '../context/LanguageContext';
 
 type Dest = 'museo' | 'mapa' | 'suenos' | 'arte' | 'talleres' | 'biblioteca' | 'blog' | 'aporte';
 
 export default function Landing({ go }: { go: (v: Dest) => void }) {
+  const { t } = useLanguage();
   const logoUrl = `${import.meta.env.BASE_URL}logo.svg`;
+
+  const periodLabels: Record<keyof typeof EPOCAS, { label: string; sub: string }> = {
+    pre: { label: t.landingPeriodPre, sub: t.landingPeriodPreSub },
+    dictadura: { label: t.landingPeriodDic, sub: t.landingPeriodDicSub },
+    transicion: { label: t.landingPeriodTra, sub: t.landingPeriodTraSub },
+    revuelta: { label: t.landingPeriodRev, sub: t.landingPeriodRevSub },
+  };
 
   return (
     <div className="mx-auto flex min-h-full max-w-6xl flex-col items-center px-4 py-12 text-center">
@@ -16,26 +25,26 @@ export default function Landing({ go }: { go: (v: Dest) => void }) {
         className="fade-in h-28 w-28 drop-shadow-md sm:h-32 sm:w-32"
       />
       <h1 className="mt-6 font-serif text-4xl font-bold leading-tight text-zinc-50 sm:text-5xl">
-        Memoria y Dignidad Maule
+        {t.landingTitle}
       </h1>
-      <p className="mt-1 font-serif text-xl italic text-ocre-500">Museo Digital & Archivo Comunitario</p>
+      <p className="mt-1 font-serif text-xl italic text-ocre-500">{t.landingSubtitle}</p>
       <p className="mt-6 max-w-3xl font-serif text-lg leading-8 text-zinc-300">
-        Un espacio abierto para recordar, investigar y visibilizar la memoria histórica, los derechos humanos, los oficios populares y las luchas sociales de Talca, Curicó, Linares y Cauquenes.
+        {t.landingDesc}
       </p>
 
       {/* Botones de acción directa */}
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <button className="btn-primary px-6 py-3 text-base shadow-sm" onClick={() => go('mapa')}>
-          Explorar el Mapa Interactivo <ArrowRight size={18} />
+          {t.exploreMapBtn} <ArrowRight size={18} />
         </button>
         <button className="btn-ghost px-6 py-3 text-base shadow-sm" onClick={() => go('suenos')}>
-          <Sparkles size={18} className="text-terra-500" /> Los Sueños que Construían
+          <Sparkles size={18} className="text-terra-500" /> {t.navSuenos}
         </button>
         <button className="btn-ghost px-6 py-3 text-base shadow-sm" onClick={() => go('arte')}>
-          <Palette size={18} className="text-ocre-600" /> Arte y Derechos
+          <Palette size={18} className="text-ocre-600" /> {t.navArte}
         </button>
         <button className="btn-ghost px-6 py-3 text-base shadow-sm" onClick={() => go('talleres')}>
-          <BookOpenCheck size={18} className="text-teal-700" /> Caja de Herramientas
+          <BookOpenCheck size={18} className="text-teal-700" /> {t.navTalleres}
         </button>
       </div>
 
@@ -43,8 +52,8 @@ export default function Landing({ go }: { go: (v: Dest) => void }) {
       <ul className="mt-14 grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-label="Períodos históricos">
         {(Object.keys(EPOCAS) as (keyof typeof EPOCAS)[]).map((k) => (
           <li key={k} className="card border-t-4 p-4 text-left shadow-sm" style={{ borderTopColor: EPOCAS[k].color }}>
-            <p className="text-xs font-semibold" style={{ color: EPOCAS[k].color }}>{EPOCAS[k].rango}</p>
-            <p className="mt-1 font-serif text-lg font-bold leading-snug text-zinc-50">{EPOCAS[k].label}</p>
+            <p className="text-xs font-semibold" style={{ color: EPOCAS[k].color }}>{periodLabels[k].sub}</p>
+            <p className="mt-1 font-serif text-lg font-bold leading-snug text-zinc-50">{periodLabels[k].label}</p>
           </li>
         ))}
       </ul>

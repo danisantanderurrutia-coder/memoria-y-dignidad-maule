@@ -4,16 +4,11 @@ import {
   Sparkles, Hammer, Users, PartyPopper, LayoutGrid, ImageOff, Utensils, Music, Heart,
 } from 'lucide-react';
 import { CategoriaSueno, HistoriaSueno } from '../types';
+import { useLanguage } from '../context/LanguageContext';
 import Modal from './Modal';
 
-const CATS: { id: CategoriaSueno | 'Todos'; icon: typeof Sparkles; label: string; hint: string }[] = [
-  { id: 'Todos', icon: LayoutGrid, label: 'Todos los relatos', hint: 'Todos los proyectos y memorias' },
-  { id: 'Oficios y Vida Cotidiana', icon: Hammer, label: 'Oficios y Vida', hint: 'Zapateros, maestras y arpilleristas' },
-  { id: 'Proyectos Colectivos y Asentamientos', icon: Users, label: 'Proyectos Colectivos', hint: 'Asentamientos, cooperativas y huertos' },
-  { id: 'Fiestas de la Solidaridad y Encuentro', icon: PartyPopper, label: 'Fiestas y Encuentro', hint: 'Peñas, rayuela y navidades populares' },
-];
-
 export default function Suenos({ historias }: { historias: HistoriaSueno[] }) {
+  const { lang, t } = useLanguage();
   const [cat, setCat] = useState<CategoriaSueno | 'Todos'>('Todos');
   const [idx, setIdx] = useState(0);
   const [galIdx, setGalIdx] = useState(0);
@@ -22,6 +17,13 @@ export default function Suenos({ historias }: { historias: HistoriaSueno[] }) {
   const [speaking, setSpeaking] = useState(false);
   const [broken, setBroken] = useState<Record<string, boolean>>({});
   const touch = useRef<number | null>(null);
+
+  const CATS: { id: CategoriaSueno | 'Todos'; icon: typeof Sparkles; label: string; hint: string }[] = [
+    { id: 'Todos', icon: LayoutGrid, label: t.filterAll, hint: 'Todos los proyectos y memorias' },
+    { id: 'Oficios y Vida Cotidiana', icon: Hammer, label: lang === 'de' ? 'Handwerk & Alltag' : lang === 'en' ? 'Trades & Daily Life' : 'Oficios y Vida', hint: 'Zapateros, maestras y arpilleristas' },
+    { id: 'Proyectos Colectivos y Asentamientos', icon: Users, label: lang === 'de' ? 'Gemeinschaftsprojekte' : lang === 'en' ? 'Collective Projects' : 'Proyectos Colectivos', hint: 'Asentamientos, cooperativas y huertos' },
+    { id: 'Fiestas de la Solidaridad y Encuentro', icon: PartyPopper, label: lang === 'de' ? 'Feste & Solidarität' : lang === 'en' ? 'Festivals & Solidarity' : 'Fiestas y Encuentro', hint: 'Peñas, rayuela y navidades populares' },
+  ];
 
   const lista = useMemo(
     () => historias.filter((h) => cat === 'Todos' || h.categoria === cat),
@@ -82,10 +84,11 @@ export default function Suenos({ historias }: { historias: HistoriaSueno[] }) {
   const hablar = () => {
     if (!actual || !('speechSynthesis' in window)) return;
     if (speaking) return stopVoice();
-    const texto = `${actual.titulo}. Comuna de ${actual.comuna}. Período ${actual.anio}. ¿Quiénes eran? ${actual.quienesEran} ¿Qué soñaban? ${actual.queSonaban} ¿Cómo celebraban? ${actual.comoCelebraban} Sabor y sonido del encuentro: ${actual.elementoSonoroCulinario}`;
+    const texto = `${actual.titulo}. Comuna de ${actual.comuna}. Período ${actual.anio}. ${t.suenosWho} ${actual.quienesEran} ${t.suenosDream} ${actual.queSonaban} ${t.suenosCelebrated} ${actual.comoCelebraban} ${t.suenosFlavorSound}: ${actual.elementoSonoroCulinario}`;
     const u = new SpeechSynthesisUtterance(texto);
-    u.lang = 'es-CL';
-    const v = window.speechSynthesis.getVoices().find((x) => x.lang.startsWith('es'));
+    const langCode = lang === 'de' ? 'de-DE' : lang === 'en' ? 'en-US' : 'es-CL';
+    u.lang = langCode;
+    const v = window.speechSynthesis.getVoices().find((x) => x.lang.startsWith(lang));
     if (v) u.voice = v;
     u.rate = 0.95;
     u.onend = () => setSpeaking(false);
@@ -107,11 +110,11 @@ export default function Suenos({ historias }: { historias: HistoriaSueno[] }) {
     <div className="mx-auto flex min-h-full max-w-7xl flex-col gap-4 p-3 md:p-6">
       <header>
         <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-terra-500">
-          <Sparkles size={16} /> Memoria de la Alegría, Oficios y Vida Cotidiana
+          <Sparkles size={16} /> {t.suenosBadge}
         </div>
-        <h1 className="mt-1 font-serif text-3xl font-semibold text-zinc-50">Los Sueños que Construían</h1>
+        <h1 className="mt-1 font-serif text-3xl font-semibold text-zinc-50">{t.suenosTitle}</h1>
         <p className="text-sm text-zinc-400">
-          Vidas laboriosas, oficios centenarios, canchas de rayuela y peñas solidarias previas al silencio. Explora las fichas con el menú flotante, flechas o deslizando.
+          {t.suenosDesc}
         </p>
       </header>
 
@@ -253,21 +256,21 @@ export default function Suenos({ historias }: { historias: HistoriaSueno[] }) {
           <div className="mt-4 flex-1 space-y-4 overflow-y-auto pr-1 text-sm leading-relaxed lg:max-h-[340px]">
             <div className="rounded-lg border border-stone-200 bg-stone-100/80 p-3.5">
               <h3 className="flex items-center gap-1.5 font-sans text-xs font-bold uppercase tracking-wider text-ocre-600">
-                <Users size={14} /> ¿Quiénes eran?
+                <Users size={14} /> {t.suenosWho}
               </h3>
               <p className="mt-1 font-serif text-zinc-800">{actual.quienesEran}</p>
             </div>
 
             <div className="rounded-lg border border-stone-200 bg-stone-100/80 p-3.5">
               <h3 className="flex items-center gap-1.5 font-sans text-xs font-bold uppercase tracking-wider text-terra-500">
-                <Heart size={14} /> ¿Qué soñaban?
+                <Heart size={14} /> {t.suenosDream}
               </h3>
               <p className="mt-1 font-serif text-zinc-800">{actual.queSonaban}</p>
             </div>
 
             <div className="rounded-lg border border-stone-200 bg-stone-100/80 p-3.5">
               <h3 className="flex items-center gap-1.5 font-sans text-xs font-bold uppercase tracking-wider text-emerald-700">
-                <PartyPopper size={14} /> ¿Cómo celebraban?
+                <PartyPopper size={14} /> {t.suenosCelebrated}
               </h3>
               <p className="mt-1 font-serif text-zinc-800">{actual.comoCelebraban}</p>
             </div>
@@ -275,7 +278,7 @@ export default function Suenos({ historias }: { historias: HistoriaSueno[] }) {
             {actual.elementoSonoroCulinario && (
               <div className="rounded-lg border border-amber-300 bg-amber-50/70 p-3.5 text-amber-950">
                 <h4 className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-800">
-                  <Utensils size={14} /> <Music size={14} /> Sabor y sonido del encuentro
+                  <Utensils size={14} /> <Music size={14} /> {t.suenosFlavorSound}
                 </h4>
                 <p className="mt-1 font-serif text-sm italic">{actual.elementoSonoroCulinario}</p>
               </div>
@@ -288,11 +291,11 @@ export default function Suenos({ historias }: { historias: HistoriaSueno[] }) {
               <button className="btn-ghost w-full" onClick={hablar} aria-pressed={speaking}>
                 {speaking ? (
                   <>
-                    <VolumeX size={16} /> Detener narración oral
+                    <VolumeX size={16} /> {t.stopSpeech}
                   </>
                 ) : (
                   <>
-                    <Volume2 size={16} /> Escuchar relato completo
+                    <Volume2 size={16} /> {t.listenSpeech}
                   </>
                 )}
               </button>

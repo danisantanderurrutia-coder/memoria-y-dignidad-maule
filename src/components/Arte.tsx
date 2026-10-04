@@ -5,14 +5,8 @@ import {
 } from 'lucide-react';
 import { CategoriaArte, ObraArte } from '../types';
 import { youtubeEmbed } from '../lib/meta';
+import { useLanguage } from '../context/LanguageContext';
 import Modal from './Modal';
-
-const CATS: { id: CategoriaArte | 'Todos'; icon: typeof Palette; label: string; hint: string }[] = [
-  { id: 'Todos', icon: LayoutGrid, label: 'Todas las obras', hint: 'Murales, poesía y música' },
-  { id: 'Murales y Gráfica Barrial', icon: Palette, label: 'Murales y Gráfica', hint: 'Brigadas, esténciles y mosaicos territoriales' },
-  { id: 'Poesía, Payas y Lira Popular', icon: BookText, label: 'Poesía y Lira Popular', hint: 'Décimas campesinas, versos y oralidad' },
-  { id: 'Música y Cultura Urbana', icon: Music2, label: 'Música y Cultura', hint: 'Canto campesino, peñas y hip-hop maulino' },
-];
 
 interface Props {
   obras: ObraArte[];
@@ -20,6 +14,7 @@ interface Props {
 }
 
 export default function Arte({ obras, onIrAlMapa }: Props) {
+  const { lang, t } = useLanguage();
   const [cat, setCat] = useState<CategoriaArte | 'Todos'>('Todos');
   const [idx, setIdx] = useState(0);
   const [auto, setAuto] = useState(false);
@@ -27,6 +22,13 @@ export default function Arte({ obras, onIrAlMapa }: Props) {
   const [speaking, setSpeaking] = useState(false);
   const [broken, setBroken] = useState<Record<string, boolean>>({});
   const touch = useRef<number | null>(null);
+
+  const CATS: { id: CategoriaArte | 'Todos'; icon: typeof Palette; label: string; hint: string }[] = [
+    { id: 'Todos', icon: LayoutGrid, label: t.filterAll, hint: 'Murales, poesía y música' },
+    { id: 'Murales y Gráfica Barrial', icon: Palette, label: lang === 'de' ? 'Wandmalerei & Grafik' : lang === 'en' ? 'Murals & Street Art' : 'Murales y Gráfica', hint: 'Brigadas, esténciles y mosaicos territoriales' },
+    { id: 'Poesía, Payas y Lira Popular', icon: BookText, label: lang === 'de' ? 'Poesie & Reime' : lang === 'en' ? 'Poetry & Popular Verse' : 'Poesía y Lira Popular', hint: 'Décimas campesinas, versos y oralidad' },
+    { id: 'Música y Cultura Urbana', icon: Music2, label: lang === 'de' ? 'Musik & Subkultur' : lang === 'en' ? 'Music & Urban Culture' : 'Música y Cultura', hint: 'Canto campesino, peñas y hip-hop maulino' },
+  ];
 
   const lista = useMemo(
     () => obras.filter((o) => cat === 'Todos' || o.categoria === cat),
@@ -87,8 +89,9 @@ export default function Arte({ obras, onIrAlMapa }: Props) {
     if (speaking) return stopVoice();
     const texto = `${actual.titulo}, de ${actual.autorColectivo}. Comuna de ${actual.comuna}. ${actual.descripcion}. ${actual.contenidoTexto || ''}`;
     const u = new SpeechSynthesisUtterance(texto);
-    u.lang = 'es-CL';
-    const v = window.speechSynthesis.getVoices().find((x) => x.lang.startsWith('es'));
+    const langCode = lang === 'de' ? 'de-DE' : lang === 'en' ? 'en-US' : 'es-CL';
+    u.lang = langCode;
+    const v = window.speechSynthesis.getVoices().find((x) => x.lang.startsWith(lang));
     if (v) u.voice = v;
     u.rate = 0.92;
     u.onend = () => setSpeaking(false);
@@ -135,11 +138,11 @@ export default function Arte({ obras, onIrAlMapa }: Props) {
     <div className="mx-auto flex min-h-full max-w-7xl flex-col gap-4 p-3 md:p-6">
       <header>
         <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ocre-600">
-          <Palette size={16} /> Expresión, Dignidad y Derechos Humanos Universales
+          <Palette size={16} /> {t.arteBadge}
         </div>
-        <h1 className="mt-1 font-serif text-3xl font-semibold text-zinc-50">Arte, Memoria y Cultura</h1>
+        <h1 className="mt-1 font-serif text-3xl font-semibold text-zinc-50">{t.arteTitle}</h1>
         <p className="text-sm text-zinc-400">
-          Murales comunitarios en los barrios maulinos, décimas campesinas que desafiaron el silencio y rimas urbanas por la dignidad humana.
+          {t.arteDesc}
         </p>
       </header>
 
@@ -228,7 +231,7 @@ export default function Arte({ obras, onIrAlMapa }: Props) {
                 onClick={() => onIrAlMapa(actual.sitioRelacionadoId)}
                 className="inline-flex items-center gap-1 rounded-full border border-terra-500/40 bg-terra-500/10 px-2.5 py-0.5 text-[11px] font-medium text-terra-600 transition hover:bg-terra-500 hover:text-white"
               >
-                <Map size={12} /> Ver sitio en Mapa
+                <Map size={12} /> {t.viewMapBtn}
               </button>
             )}
           </div>
@@ -256,7 +259,7 @@ export default function Arte({ obras, onIrAlMapa }: Props) {
             {actual.contenidoTexto && (
               <div className="rounded-lg border-l-4 border-terra-500 bg-stone-100/90 p-4 shadow-inner">
                 <p className="mb-2 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-terra-500">
-                  <BookText size={14} /> Texto / Poesía / Lira Popular
+                  <BookText size={14} /> {t.artePoetryTitle}
                 </p>
                 <pre className="whitespace-pre-line font-serif text-xs italic leading-relaxed text-zinc-800">
                   {actual.contenidoTexto}
@@ -280,11 +283,11 @@ export default function Arte({ obras, onIrAlMapa }: Props) {
               <button className="btn-ghost w-full" onClick={recitar} aria-pressed={speaking}>
                 {speaking ? (
                   <>
-                    <VolumeX size={16} /> Detener declamación
+                    <VolumeX size={16} /> {t.stopSpeech}
                   </>
                 ) : (
                   <>
-                    <Volume2 size={16} /> Escuchar lectura / declamación
+                    <Volume2 size={16} /> {t.arteDeclaim}
                   </>
                 )}
               </button>

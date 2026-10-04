@@ -5,18 +5,11 @@ import {
 } from 'lucide-react';
 import { CategoriaMuseo, RegistroMuseo } from '../types';
 import { youtubeEmbed } from '../lib/meta';
+import { useLanguage } from '../context/LanguageContext';
 import Modal from './Modal';
 
-const CATS: { id: CategoriaMuseo | 'Todos'; icon: typeof Landmark; hint: string }[] = [
-  { id: 'Todos', icon: LayoutGrid, hint: 'Todos los registros' },
-  { id: 'Lugares', icon: Landmark, hint: 'Sitios, memoriales y paisajes' },
-  { id: 'Momentos', icon: Clock, hint: 'Hechos y fechas' },
-  { id: 'Acciones', icon: Megaphone, hint: 'Marchas, luchas y conmemoraciones' },
-  { id: 'Documentos', icon: FileText, hint: 'Informes y archivos' },
-  { id: 'Prensa', icon: Newspaper, hint: 'Portadas y notas de diario' },
-];
-
 export default function Museo({ registros }: { registros: RegistroMuseo[] }) {
+  const { lang, t } = useLanguage();
   const [cat, setCat] = useState<CategoriaMuseo | 'Todos'>('Todos');
   const [idx, setIdx] = useState(0);
   const [auto, setAuto] = useState(false);
@@ -24,6 +17,15 @@ export default function Museo({ registros }: { registros: RegistroMuseo[] }) {
   const [speaking, setSpeaking] = useState(false);
   const [broken, setBroken] = useState<Record<string, boolean>>({});
   const touch = useRef<number | null>(null);
+
+  const CATS: { id: CategoriaMuseo | 'Todos'; icon: typeof Landmark; label: string; hint: string }[] = [
+    { id: 'Todos', icon: LayoutGrid, label: t.filterAll, hint: 'Todos los registros' },
+    { id: 'Lugares', icon: Landmark, label: lang === 'de' ? 'Orte & Mahnmale' : lang === 'en' ? 'Places & Memorials' : 'Lugares', hint: 'Sitios, memoriales y paisajes' },
+    { id: 'Momentos', icon: Clock, label: lang === 'de' ? 'Zeitpunkte' : lang === 'en' ? 'Moments' : 'Momentos', hint: 'Hechos y fechas' },
+    { id: 'Acciones', icon: Megaphone, label: lang === 'de' ? 'Aktionen' : lang === 'en' ? 'Actions' : 'Acciones', hint: 'Marchas, luchas y conmemoraciones' },
+    { id: 'Documentos', icon: FileText, label: lang === 'de' ? 'Dokumente' : lang === 'en' ? 'Documents' : 'Documentos', hint: 'Informes y archivos' },
+    { id: 'Prensa', icon: Newspaper, label: lang === 'de' ? 'Presse' : lang === 'en' ? 'Press' : 'Prensa', hint: 'Portadas y notas de diario' },
+  ];
 
   const lista = useMemo(() => registros.filter((r) => cat === 'Todos' || r.categoria === cat), [registros, cat]);
   const conteo = useMemo(() => {
@@ -64,8 +66,9 @@ export default function Museo({ registros }: { registros: RegistroMuseo[] }) {
     if (!actual || !('speechSynthesis' in window)) return;
     if (speaking) return stopVoice();
     const u = new SpeechSynthesisUtterance(`${actual.titulo}. ${actual.relato}`);
-    u.lang = 'es-CL';
-    const v = window.speechSynthesis.getVoices().find((x) => x.lang.startsWith('es'));
+    const langCode = lang === 'de' ? 'de-DE' : lang === 'en' ? 'en-US' : 'es-CL';
+    u.lang = langCode;
+    const v = window.speechSynthesis.getVoices().find((x) => x.lang.startsWith(lang));
     if (v) u.voice = v;
     u.rate = 0.95;
     u.onend = () => setSpeaking(false);
@@ -104,8 +107,8 @@ export default function Museo({ registros }: { registros: RegistroMuseo[] }) {
   return (
     <div className="mx-auto flex min-h-full max-w-7xl flex-col gap-4 p-3 md:p-6">
       <header>
-        <h1 className="font-serif text-3xl font-semibold text-zinc-50">Museo Digital</h1>
-        <p className="text-sm text-zinc-400">Fotografías, documentos, portadas de prensa y videos con su relato. Usa el menú flotante, las flechas del teclado o desliza para recorrer.</p>
+        <h1 className="font-serif text-3xl font-semibold text-zinc-50">{t.museoTitle}</h1>
+        <p className="text-sm text-zinc-400">{t.museoDesc}</p>
       </header>
 
       <div className="grid flex-1 gap-4 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]"
@@ -117,12 +120,12 @@ export default function Museo({ registros }: { registros: RegistroMuseo[] }) {
 
           {/* Menú flotante de categorías */}
           <nav aria-label="Categorías del museo" className="absolute left-2 top-2 z-10 flex gap-1 overflow-x-auto rounded-2xl bg-white/90 p-1.5 shadow-lg backdrop-blur md:left-3 md:top-3 md:flex-col md:overflow-visible" style={{ maxWidth: 'calc(100% - 1rem)' }}>
-            {CATS.map(({ id, icon: I, hint }) => (
+            {CATS.map(({ id, icon: I, label, hint }) => (
               <button key={id} title={hint} aria-pressed={cat === id} onClick={() => setCat(id)}
-                className={`group flex shrink-0 items-center gap-2 rounded-xl px-2.5 py-1.5 text-xs font-medium transition ${cat === id ? 'bg-terra-500 text-white' : 'text-zinc-300 hover:bg-zinc-800'}`}>
+                className={`group flex shrink-0 items-center gap-2 rounded-xl px-2.5 py-1.5 text-xs font-medium transition ${cat === id ? 'bg-terra-500 text-white' : 'text-zinc-700 hover:bg-stone-200'}`}>
                 <I size={16} />
-                <span className="hidden sm:inline">{id}</span>
-                <span className={`rounded-full px-1.5 text-[10px] ${cat === id ? 'bg-white/25' : 'bg-zinc-800 text-zinc-400'}`}>{conteo[id] ?? 0}</span>
+                <span className="hidden sm:inline">{label}</span>
+                <span className={`rounded-full px-1.5 text-[10px] ${cat === id ? 'bg-white/25 text-white' : 'bg-stone-200 text-zinc-600'}`}>{conteo[id] ?? 0}</span>
               </button>
             ))}
           </nav>
@@ -155,12 +158,12 @@ export default function Museo({ registros }: { registros: RegistroMuseo[] }) {
             {actual.audioUrl && <audio controls src={actual.audioUrl} className="w-full" aria-label="Audio del registro" />}
             {'speechSynthesis' in window && (
               <button className="btn-ghost w-full" onClick={hablar} aria-pressed={speaking}>
-                {speaking ? <><VolumeX size={16} /> Detener lectura</> : <><Volume2 size={16} /> Escuchar relato</>}
+                {speaking ? <><VolumeX size={16} /> {t.stopSpeech}</> : <><Volume2 size={16} /> {t.listenSpeech}</>}
               </button>
             )}
-            <p className="text-[11px] leading-snug text-zinc-500">Crédito: {actual.credito}</p>
+            <p className="text-[11px] leading-snug text-zinc-500">{t.museoCredit} {actual.credito}</p>
             {actual.fuenteUrl && (
-              <a href={actual.fuenteUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-ocre-400 underline"><ExternalLink size={12} /> Ver ficha original</a>
+              <a href={actual.fuenteUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-ocre-400 underline"><ExternalLink size={12} /> {t.museoOriginalSource}</a>
             )}
           </div>
         </article>

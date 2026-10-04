@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import {
   Map, Library as LibIcon, Newspaper, HandHeart, ShieldCheck, Menu, X, LogOut, Lock,
-  Sparkles, Palette, BookOpenCheck, Landmark
+  Sparkles, Palette, BookOpenCheck, Landmark, Globe
 } from 'lucide-react';
 import { useLocalStorage } from './hooks/useLocalStorage';
+import { useLanguage } from './context/LanguageContext';
 import { SEED_APORTES, SEED_ARTICULOS, SEED_COMENTARIOS, SEED_DOCUMENTOS, SEED_SITIOS } from './data/seed';
 import { SEED_VERSION, SEED_SITIOS_V2, SEED_ARTICULOS_V2, SEED_DOCUMENTOS_V2 } from './data/seedV2';
 import { SEED_MUSEO } from './data/seedMuseo';
@@ -34,18 +35,9 @@ export type View =
 
 const ADMIN_PIN = '1973';
 
-const NAV = [
-  { id: 'mapa', label: 'Mapa', icon: Map },
-  { id: 'suenos', label: 'Los Sueños que Construían', icon: Sparkles },
-  { id: 'arte', label: 'Arte & Cultura', icon: Palette },
-  { id: 'talleres', label: 'Talleres', icon: BookOpenCheck },
-  { id: 'museo', label: 'Museo', icon: Landmark },
-  { id: 'biblioteca', label: 'Biblioteca', icon: LibIcon },
-  { id: 'blog', label: 'Noticias & Crónicas', icon: Newspaper },
-  { id: 'aporte', label: 'Archivo Abierto', icon: HandHeart },
-] as const;
 
 export default function App() {
+  const { lang, setLang, t } = useLanguage();
   const [view, setView] = useState<View>('inicio');
   const [selectedMapSiteId, setSelectedMapSiteId] = useState<string | null>(null);
   const [menu, setMenu] = useState(false);
@@ -53,6 +45,17 @@ export default function App() {
   const [login, setLogin] = useState(false);
   const [pin, setPin] = useState('');
   const [pinErr, setPinErr] = useState(false);
+
+  const navItems = [
+    { id: 'mapa', label: t.navMapa, icon: Map },
+    { id: 'suenos', label: t.navSuenos, icon: Sparkles },
+    { id: 'arte', label: t.navArte, icon: Palette },
+    { id: 'talleres', label: t.navTalleres, icon: BookOpenCheck },
+    { id: 'museo', label: t.navMuseo, icon: Landmark },
+    { id: 'biblioteca', label: t.navBiblioteca, icon: LibIcon },
+    { id: 'blog', label: t.navBlog, icon: Newspaper },
+    { id: 'aporte', label: t.navAporte, icon: HandHeart },
+  ] as const;
 
   // Estados persistentes con localStorage
   const [sitios, setSitios] = useLocalStorage('mdm:sitios', [...SEED_SITIOS, ...SEED_SITIOS_V2]);
@@ -155,16 +158,53 @@ export default function App() {
             />
             <div>
               <span className="block font-serif text-xl sm:text-2xl font-bold leading-tight text-zinc-50 group-hover:text-terra-600 transition-colors">
-                Memoria y Dignidad Maule
+                {t.siteTitle}
               </span>
               <span className="block text-xs sm:text-sm font-medium text-terra-500">
-                Museo digital de derechos humanos, memorias populares y oficios del Maule
+                {t.siteSubtitle}
               </span>
             </div>
           </button>
 
-          {/* Acciones de administración */}
+          {/* Selector de Idiomas + Acciones de administración */}
           <div className="flex items-center gap-2">
+            {/* Selector de idioma */}
+            <div className="flex items-center rounded-lg border border-zinc-700 bg-stone-100/90 p-0.5 text-xs font-semibold shadow-inner" role="group" aria-label="Seleccionar idioma">
+              <span className="hidden sm:flex items-center gap-1 px-1.5 text-zinc-400">
+                <Globe size={13} />
+              </span>
+              <button
+                onClick={() => setLang('es')}
+                aria-pressed={lang === 'es'}
+                title="Español"
+                className={`rounded px-2 py-1 transition ${
+                  lang === 'es' ? 'bg-terra-500 text-white shadow-sm' : 'text-zinc-600 hover:text-zinc-950'
+                }`}
+              >
+                ES
+              </button>
+              <button
+                onClick={() => setLang('en')}
+                aria-pressed={lang === 'en'}
+                title="English"
+                className={`rounded px-2 py-1 transition ${
+                  lang === 'en' ? 'bg-terra-500 text-white shadow-sm' : 'text-zinc-600 hover:text-zinc-950'
+                }`}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setLang('de')}
+                aria-pressed={lang === 'de'}
+                title="Deutsch"
+                className={`rounded px-2 py-1 transition ${
+                  lang === 'de' ? 'bg-terra-500 text-white shadow-sm' : 'text-zinc-600 hover:text-zinc-950'
+                }`}
+              >
+                DE
+              </button>
+            </div>
+
             {isAdmin ? (
               <div className="flex items-center gap-1.5">
                 <button
@@ -175,7 +215,7 @@ export default function App() {
                   }`}
                   title="Ir al panel de administración"
                 >
-                  <ShieldCheck size={16} /> <span className="hidden sm:inline">Panel Admin</span>
+                  <ShieldCheck size={16} /> <span className="hidden sm:inline">{t.panelAdmin}</span>
                 </button>
                 <button
                   className="btn-danger p-2 text-xs"
@@ -212,7 +252,7 @@ export default function App() {
         {/* Fila 2: Barra de Navegación Espaciosa */}
         <div className="hidden md:flex items-center justify-center px-4 py-2 bg-stone-50/70">
           <nav aria-label="Navegación principal" className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
-            {NAV.map(({ id, label, icon: I }) => (
+            {navItems.map(({ id, label, icon: I }) => (
               <button
                 key={id}
                 onClick={() => go(id)}
@@ -232,7 +272,7 @@ export default function App() {
         {/* Drawer Móvil Desplegable */}
         {menu && (
           <nav aria-label="Menú móvil" className="fade-in space-y-1.5 border-t border-zinc-800 bg-white p-4 md:hidden max-h-[80vh] overflow-y-auto">
-            {NAV.map(({ id, label, icon: I }) => (
+            {navItems.map(({ id, label, icon: I }) => (
               <button
                 key={id}
                 onClick={() => go(id)}
