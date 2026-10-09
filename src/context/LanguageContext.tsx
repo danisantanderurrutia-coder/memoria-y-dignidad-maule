@@ -13,6 +13,7 @@ export interface Translations {
   navMuseo: string;
   navBiblioteca: string;
   navBlog: string;
+  navExposicion: string;
   navAporte: string;
   panelAdmin: string;
   adminLoginTitle: string;
@@ -88,6 +89,7 @@ export const DICTIONARY: Record<Language, Translations> = {
     navMuseo: 'Museo',
     navBiblioteca: 'Biblioteca',
     navBlog: 'Noticias & Crónicas',
+    navExposicion: 'Colonia Dignidad & Europa',
     navAporte: 'Archivo Abierto',
     panelAdmin: 'Panel Admin',
     adminLoginTitle: 'Acceso de administración',
@@ -158,6 +160,7 @@ export const DICTIONARY: Record<Language, Translations> = {
     navMuseo: 'Museum',
     navBiblioteca: 'Library',
     navBlog: 'News & Chronicles',
+    navExposicion: 'Colonia Dignidad & Europe',
     navAporte: 'Open Archive',
     panelAdmin: 'Admin Panel',
     adminLoginTitle: 'Administration Access',
@@ -228,6 +231,7 @@ export const DICTIONARY: Record<Language, Translations> = {
     navMuseo: 'Museum',
     navBiblioteca: 'Bibliothek',
     navBlog: 'Nachrichten & Chroniken',
+    navExposicion: 'Colonia Dignidad & Europa',
     navAporte: 'Offenes Archiv',
     panelAdmin: 'Admin-Bereich',
     adminLoginTitle: 'Administrator-Zugang',

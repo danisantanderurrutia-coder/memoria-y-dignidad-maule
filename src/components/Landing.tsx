@@ -1,11 +1,11 @@
-import { ArrowRight, Library, Newspaper, HandHeart, Landmark, Sparkles, Palette, BookOpenCheck } from 'lucide-react';
+import { ArrowRight, Library, Newspaper, HandHeart, Landmark, Sparkles, Palette, BookOpenCheck, Globe2 } from 'lucide-react';
 import { EPOCAS } from '../lib/meta';
 import { useLanguage } from '../context/LanguageContext';
 
-type Dest = 'museo' | 'mapa' | 'suenos' | 'arte' | 'talleres' | 'biblioteca' | 'blog' | 'aporte';
+type Dest = 'museo' | 'mapa' | 'suenos' | 'arte' | 'talleres' | 'biblioteca' | 'blog' | 'aporte' | 'exposicion';
 
 export default function Landing({ go }: { go: (v: Dest) => void }) {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const logoUrl = `${import.meta.env.BASE_URL}logo.svg`;
 
   const periodLabels: Record<keyof typeof EPOCAS, { label: string; sub: string }> = {
@@ -32,19 +32,23 @@ export default function Landing({ go }: { go: (v: Dest) => void }) {
         {t.landingDesc}
       </p>
 
-      {/* Botones de acción directa */}
+      {/* Botones de acción directa con Acceso Destacado a la Exposición Internacional */}
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <button className="btn-primary px-6 py-3 text-base shadow-sm" onClick={() => go('mapa')}>
           {t.exploreMapBtn} <ArrowRight size={18} />
         </button>
+        <button
+          className="rounded-lg border-2 border-terra-500 bg-terra-950/40 px-6 py-3 text-base font-bold text-terra-400 shadow-md transition hover:bg-terra-900/60 flex items-center gap-2"
+          onClick={() => go('exposicion')}
+        >
+          <Globe2 size={18} className="text-terra-400" />
+          {lang === 'de' ? 'Sonderausstellung Colonia Dignidad' : lang === 'en' ? 'Colonia Dignidad Exhibition' : 'Exposición: Colonia Dignidad'}
+        </button>
+        <button className="btn-ghost px-6 py-3 text-base shadow-sm" onClick={() => go('museo')}>
+          <Landmark size={18} className="text-terra-500" /> {t.navMuseo}
+        </button>
         <button className="btn-ghost px-6 py-3 text-base shadow-sm" onClick={() => go('suenos')}>
           <Sparkles size={18} className="text-terra-500" /> {t.navSuenos}
-        </button>
-        <button className="btn-ghost px-6 py-3 text-base shadow-sm" onClick={() => go('arte')}>
-          <Palette size={18} className="text-ocre-600" /> {t.navArte}
-        </button>
-        <button className="btn-ghost px-6 py-3 text-base shadow-sm" onClick={() => go('talleres')}>
-          <BookOpenCheck size={18} className="text-teal-700" /> {t.navTalleres}
         </button>
       </div>
 
@@ -60,6 +64,27 @@ export default function Landing({ go }: { go: (v: Dest) => void }) {
 
       {/* Tarjetas de Módulos */}
       <div className="mt-12 grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <button onClick={() => go('exposicion')} className="card group flex items-start gap-3.5 p-5 text-left transition border-terra-500/50 bg-terra-950/20 hover:border-terra-500 hover:shadow-lg sm:col-span-2 lg:col-span-3">
+          <Globe2 className="mt-1 h-7 w-7 shrink-0 text-terra-400 group-hover:scale-110 transition-transform" />
+          <span>
+            <div className="flex items-center gap-2">
+              <b className="block font-serif text-xl text-zinc-50 group-hover:text-terra-400">
+                {lang === 'de' ? 'Sonderausstellung: Colonia Dignidad, NS-Netzwerke & Diktatur' : lang === 'en' ? 'Special Exhibition: Colonia Dignidad, Nazi Networks & Dictatorship' : 'Exposición Especial: Colonia Dignidad, Redes Nazis y Dictadura'}
+              </b>
+              <span className="rounded-full bg-terra-500/20 px-2.5 py-0.5 text-xs font-bold text-terra-300 border border-terra-500/30">
+                Parral · DE/EN/ES
+              </span>
+            </div>
+            <span className="mt-1.5 block text-sm text-zinc-300">
+              {lang === 'de'
+                ? 'Kuratierte Ausstellungstafeln für Vorträge und Gedenkveranstaltungen in Europa: Paul Schäfers Flucht aus der BRD, DINA-Folterzentrum, Operation Fernseher-Rückzug am Rio Perquilauquén, deutsches diplomatisches Versagen und Beschluss des Deutschen Bundestages.'
+                : lang === 'en'
+                ? 'Curated international panels for exhibitions in Europe: Schäfer’s escape from West Germany, secret DINA torture command, clandestine graves by the Perquilauquén River, German diplomatic complicity, and the German Bundestag resolution.'
+                : 'Dossier y paneles curatoriales para conferencias y exposiciones en Europa: fuga de Alemania en 1961, cuartel de la DINA en Parral, fosas comunes del río Perquilauquén, complicidad consular del BND y resoluciones del Bundestag alemán.'}
+            </span>
+          </span>
+        </button>
+
         <button onClick={() => go('suenos')} className="card group flex items-start gap-3.5 p-5 text-left transition hover:border-terra-500 hover:shadow-md">
           <Sparkles className="mt-1 h-6 w-6 shrink-0 text-terra-500 group-hover:scale-110 transition-transform" />
           <span>

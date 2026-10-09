@@ -9,6 +9,7 @@ import { SEED_APORTES, SEED_ARTICULOS, SEED_COMENTARIOS, SEED_DOCUMENTOS, SEED_S
 import { SEED_VERSION, SEED_SITIOS_V2, SEED_ARTICULOS_V2, SEED_DOCUMENTOS_V2 } from './data/seedV2';
 import { SEED_MUSEO } from './data/seedMuseo';
 import { SEED_SUENOS, SEED_ARTE, SEED_TALLERES } from './data/seedComunitario';
+import { DIGNIDAD_SITIOS, DIGNIDAD_MUSEO, DIGNIDAD_DOCUMENTOS, DIGNIDAD_ARTICULOS } from './data/seedDignidad';
 import MapPage from './components/MapPage';
 import Library from './components/Library';
 import Blog from './components/Blog';
@@ -20,6 +21,7 @@ import Museo from './components/Museo';
 import Suenos from './components/Suenos';
 import Arte from './components/Arte';
 import Talleres from './components/Talleres';
+import ColoniaDignidadExhibition from './components/ColoniaDignidadExhibition';
 
 export type View =
   | 'inicio'
@@ -28,6 +30,7 @@ export type View =
   | 'arte'
   | 'talleres'
   | 'museo'
+  | 'exposicion'
   | 'biblioteca'
   | 'blog'
   | 'aporte'
@@ -48,45 +51,46 @@ export default function App() {
 
   const navItems = [
     { id: 'mapa', label: t.navMapa, icon: Map },
+    { id: 'exposicion', label: t.navExposicion, icon: Globe },
+    { id: 'museo', label: t.navMuseo, icon: Landmark },
     { id: 'suenos', label: t.navSuenos, icon: Sparkles },
     { id: 'arte', label: t.navArte, icon: Palette },
     { id: 'talleres', label: t.navTalleres, icon: BookOpenCheck },
-    { id: 'museo', label: t.navMuseo, icon: Landmark },
     { id: 'biblioteca', label: t.navBiblioteca, icon: LibIcon },
     { id: 'blog', label: t.navBlog, icon: Newspaper },
     { id: 'aporte', label: t.navAporte, icon: HandHeart },
   ] as const;
 
   // Estados persistentes con localStorage
-  const [sitios, setSitios] = useLocalStorage('mdm:sitios', [...SEED_SITIOS, ...SEED_SITIOS_V2]);
-  const [articulos, setArticulos] = useLocalStorage('mdm:articulos', [...SEED_ARTICULOS, ...SEED_ARTICULOS_V2]);
+  const [sitios, setSitios] = useLocalStorage('mdm:sitios', [...SEED_SITIOS, ...SEED_SITIOS_V2, ...DIGNIDAD_SITIOS]);
+  const [articulos, setArticulos] = useLocalStorage('mdm:articulos', [...SEED_ARTICULOS, ...SEED_ARTICULOS_V2, ...DIGNIDAD_ARTICULOS]);
   const [comentarios, setComentarios] = useLocalStorage('mdm:comentarios', SEED_COMENTARIOS);
   const [aportes, setAportes] = useLocalStorage('mdm:aportes', SEED_APORTES);
-  const [documentos, setDocumentos] = useLocalStorage('mdm:documentos', [...SEED_DOCUMENTOS, ...SEED_DOCUMENTOS_V2]);
-  const [registrosMuseo, setRegistrosMuseo] = useLocalStorage('mdm:museo', SEED_MUSEO);
+  const [documentos, setDocumentos] = useLocalStorage('mdm:documentos', [...SEED_DOCUMENTOS, ...SEED_DOCUMENTOS_V2, ...DIGNIDAD_DOCUMENTOS]);
+  const [registrosMuseo, setRegistrosMuseo] = useLocalStorage('mdm:museo', [...SEED_MUSEO, ...DIGNIDAD_MUSEO]);
 
   // Nuevos 3 módulos
   const [suenos, setSuenos] = useLocalStorage('mdm:suenos', SEED_SUENOS);
   const [arte, setArte] = useLocalStorage('mdm:arte', SEED_ARTE);
   const [talleres, setTalleres] = useLocalStorage('mdm:talleres', SEED_TALLERES);
 
-  const [seedVer, setSeedVer] = useLocalStorage('mdm:seedver_v4', 0);
+  const [seedVer, setSeedVer] = useLocalStorage('mdm:seedver_v5', 0);
 
   // Sincronización de migraciones en localStorage
   useEffect(() => {
-    if (seedVer >= 4) return;
+    if (seedVer >= 5) return;
     const merge = <T extends { id: string }>(cur: T[], extra: T[]) => [
       ...cur,
       ...extra.filter((e) => !cur.some((c) => c.id === e.id)),
     ];
-    setSitios((c) => merge(c, SEED_SITIOS_V2));
-    setArticulos(() => [...SEED_ARTICULOS, ...SEED_ARTICULOS_V2]);
-    setDocumentos((c) => merge(c, SEED_DOCUMENTOS_V2));
-    setRegistrosMuseo(() => SEED_MUSEO);
+    setSitios((c) => merge(c, [...SEED_SITIOS_V2, ...DIGNIDAD_SITIOS]));
+    setArticulos((c) => merge(c, [...SEED_ARTICULOS_V2, ...DIGNIDAD_ARTICULOS]));
+    setDocumentos((c) => merge(c, [...SEED_DOCUMENTOS_V2, ...DIGNIDAD_DOCUMENTOS]));
+    setRegistrosMuseo((c) => merge(c, DIGNIDAD_MUSEO));
     setSuenos(() => SEED_SUENOS);
     setArte(() => SEED_ARTE);
     setTalleres((c) => merge(c, SEED_TALLERES));
-    setSeedVer(4);
+    setSeedVer(5);
   }, [seedVer, setSitios, setArticulos, setDocumentos, setRegistrosMuseo, setSuenos, setArte, setTalleres, setSeedVer]);
 
   const go = (v: View) => {
@@ -301,6 +305,9 @@ export default function App() {
         {current === 'inicio' && <Landing go={go} />}
         {current === 'mapa' && (
           <MapPage sitios={sitios} initialSelectedId={selectedMapSiteId} />
+        )}
+        {current === 'exposicion' && (
+          <ColoniaDignidadExhibition onIrAlSitioEnMapa={handleIrAlMapa} />
         )}
         {current === 'suenos' && <Suenos historias={suenos} />}
         {current === 'arte' && <Arte obras={arte} onIrAlMapa={handleIrAlMapa} />}

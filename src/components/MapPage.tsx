@@ -47,6 +47,24 @@ export default function MapPage({ sitios, initialSelectedId }: Props) {
             <span className="text-xs text-zinc-400" aria-live="polite">{filtrados.length} de {sitios.length}</span>
           </div>
 
+          {/* Acceso Rápido Destacado: Ruta Parral & Colonia Dignidad */}
+          <div className="rounded-lg border border-terra-500/40 bg-terra-950/20 p-3 text-xs">
+            <div className="flex items-center justify-between font-bold text-terra-400">
+              <span>Ruta Parral & Colonia Dignidad</span>
+              <span className="rounded bg-terra-500/20 px-1.5 py-0.5 text-[10px]">Especial</span>
+            </div>
+            <p className="mt-1 text-zinc-400">Fosas clandestinas, cuarteles DINA y red de túneles en Parral.</p>
+            <button
+              onClick={() => {
+                setProvincia('Linares');
+                setTipo('colonia');
+              }}
+              className="mt-2 w-full rounded bg-terra-600 px-2 py-1 text-center font-semibold text-white shadow-sm hover:bg-terra-500 transition"
+            >
+              Ver Enclave y Fosas Parral
+            </button>
+          </div>
+
           <fieldset>
             <legend className="label">Época histórica</legend>
             <div className="space-y-1">
