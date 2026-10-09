@@ -230,6 +230,90 @@ export const DIGNIDAD_MUSEO: RegistroMuseo[] = [
       'Llegada histórica del tren al sur del Maule: por estos andenes arribaron delegaciones de Amnistía Internacional en 1977, jueces de la República y madres que buscaban a sus hijos en el fundo El Lavadero.',
     audioUrl: '',
   },
+  {
+    id: 'dignidad-perquilauquen-rio',
+    titulo: 'Río Perquilauquén: Destino Final de las Cenizas de la «Operación Retiro de Televisores»',
+    categoria: 'Lugares',
+    tipo: 'foto',
+    mediaUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b8/Parral_and_river_Perquilauqu%C3%A9n.jpg',
+    fuenteUrl: 'https://commons.wikimedia.org/wiki/File:Parral_and_river_Perquilauqu%C3%A9n.jpg',
+    credito: 'Cethos / Wikimedia Commons (CC BY-SA 4.0)',
+    anio: '1978–presente',
+    lugar: 'Límite Parral - Ñuble, Río Perquilauquén',
+    relato:
+      'Caudal del río Perquilauquén en la precordillera de Parral. En estas aguas fueron arrojadas las cenizas y restos óseos calcinados de decenas de opositores a la dictadura tras ser exhumados clandestinamente con maquinaria pesada en 1978.',
+    audioUrl: '',
+  },
+  {
+    id: 'dignidad-hotel-turismo-negacionismo',
+    titulo: 'El Dilema de «Villa Baviera»: Turismo Comercial sobre un Centro de Tortura',
+    categoria: 'Lugares',
+    tipo: 'foto',
+    mediaUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/49/Hotel_Villa_Baviera.jpg',
+    fuenteUrl: 'https://commons.wikimedia.org/wiki/File:Hotel_Villa_Baviera.jpg',
+    credito: 'Wikimedia Commons (CC BY-SA 3.0)',
+    anio: 'Actualidad',
+    lugar: 'Fundo El Lavadero, Parral',
+    relato:
+      'Instalaciones hoteleras y gastronómicas abiertas al turismo en los mismos terrenos donde operaron el búnker y las celdas de aislamiento. Agrupaciones de derechos humanos de Chile y Alemania exigen su expropiación para transformarlo en un Sitio de Memoria sin fines de lucro.',
+    audioUrl: '',
+  },
+  {
+    id: 'dignidad-myrna-troncoso',
+    titulo: 'Myrna Troncoso: Medio Siglo de Lucha contra la Impunidad de Schäfer',
+    categoria: 'Acciones',
+    tipo: 'foto',
+    mediaUrl: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Myrna_Troncoso.jpg',
+    fuenteUrl: 'https://commons.wikimedia.org/wiki/File:Myrna_Troncoso.jpg',
+    credito: 'Archivo Agrupación de Familiares / Wikimedia Commons (CC BY-SA 4.0)',
+    anio: '1975–presente',
+    lugar: 'Parral / Talca',
+    relato:
+      'Retrato de Myrna Troncoso, emblemática dirigenta de la Agrupación de Familiares de Detenidos Desaparecidos y Ejecutados Políticos de Talca y Parral. Su hermano Ricardo Troncoso Muñoz fue secuestrado en Santiago por la DINA y hecho desaparecer en Colonia Dignidad.',
+    audioUrl: '',
+  },
+  {
+    id: 'dignidad-margarita-romero',
+    titulo: 'Asociación por la Memoria y los Derechos Humanos Colonia Dignidad',
+    categoria: 'Acciones',
+    tipo: 'foto',
+    mediaUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/ea/Margarita_Romero_M%C3%A9ndez.JPG',
+    fuenteUrl: 'https://commons.wikimedia.org/wiki/File:Margarita_Romero_M%C3%A9ndez.JPG',
+    credito: 'Wikimedia Commons (CC BY-SA 4.0)',
+    anio: '2014–presente',
+    lugar: 'Berlín / Santiago / Parral',
+    relato:
+      'Dra. Margarita Romero Méndez, presidenta de la Asociación por la Memoria y los Derechos Humanos Colonia Dignidad, impulsora ante el Bundestag alemán y el gobierno de Chile de la comisión binacional para el esclarecimiento de crímenes y la creación de la Gedenkstätte.',
+    audioUrl: '',
+  },
+  {
+    id: 'dignidad-plaza-armas-parral',
+    titulo: 'Plaza de Armas de Parral: Epicentro Cívico del Maule Sur',
+    categoria: 'Lugares',
+    tipo: 'foto',
+    mediaUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Plaza_de_Armas_de_Parral.JPG',
+    fuenteUrl: 'https://commons.wikimedia.org/wiki/File:Plaza_de_Armas_de_Parral.JPG',
+    credito: 'Wikimedia Commons (CC BY-SA 3.0)',
+    anio: 'Contemporáneo',
+    lugar: 'Parral',
+    relato:
+      'La plaza principal de Parral ha sido el espacio cívico donde se reunieron comisiones parlamentarias, periodistas internacionales que investigaban a Schäfer y las vigilias anuales de organizaciones maulinas demandando justicia.',
+    audioUrl: '',
+  },
+  {
+    id: 'dignidad-mural-parral-alameda',
+    titulo: 'Mural de la Identidad y Memoria en la Alameda de Parral',
+    categoria: 'Lugares',
+    tipo: 'foto',
+    mediaUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Mural_Alameda_Parral.jpg',
+    fuenteUrl: 'https://commons.wikimedia.org/wiki/File:Mural_Alameda_Parral.jpg',
+    credito: 'Xarucoponce / Wikimedia Commons (CC BY-SA 4.0)',
+    anio: '2020',
+    lugar: 'Alameda de las Delicias, Parral',
+    relato:
+      'Mural patrimonial en Parral que rinde homenaje a la historia popular del territorio, al campesinado maulino y a la memoria de un pueblo que se negó a vivir bajo la sombra del silencio y el miedo impuesto por el enclave.',
+    audioUrl: '',
+  },
 ];
 
 // =========================================================================
@@ -283,7 +367,7 @@ export const DIGNIDAD_DOCUMENTOS: Documento[] = [
 ];
 
 // =========================================================================
-// 4. CRÓNICA / ARTÍCULO EN PROFUNDIDAD
+// 4. CRÓNICAS Y NOTICIAS EN PROFUNDIDAD (INVESTIGACIÓN DE CRÍMENES Y VERDAD)
 // =========================================================================
 export const DIGNIDAD_ARTICULOS: Articulo[] = [
   {
@@ -299,4 +383,41 @@ export const DIGNIDAD_ARTICULOS: Articulo[] = [
     contenido:
       'A principios de la década de 1960, Paul Schäfer —un exenfermero de la Wehrmacht y predicador fundamentalista— huyó de Alemania Occidental tras órdenes de arresto por abuso de menores y fundó la Sociedad Benefactora y Educacional Dignidad en el fundo El Lavadero, en la precordillera de Parral, Región del Maule.\n\nCon el golpe de Estado de 1973, el enclave selló un pacto criminal con la Dirección de Inteligencia Nacional (DINA) de Manuel Contreras. Colonia Dignidad no fue un mero campo de trabajo forzado para sus colonos: se transformó en un cuartel clandestino de torturas e interrogatorios de prisioneros políticos trasladados desde Santiago y el Maule, una fábrica clandestina de armas y un laboratorio de experimentación química con gas sarín encabezado por el bioquímico Eugenio Berríos.\n\nEn 1978, la dictadura orquestó la siniestra «Operación Retiro de Televisores»: fosas comunes en las riberas del río Perquilauquén fueron desenterradas con maquinaria pesada, los restos quemados con fósforo químico y las cenizas arrojadas al río para impedir cualquier prueba forense futura.\n\nDurante cuatro décadas, la embajada alemana en Santiago y la diplomacia de Bonn miraron hacia otro lado a pesar de las denuncias de fugitivos heroicos como Wolfgang Müller y Salo Luna, y de los informes de Amnistía Internacional de 1977. No fue sino hasta 2016 cuando el ministro de Relaciones Exteriores Frank-Walter Steinmeier reconoció públicamente la corresponsabilidad moral del Estado alemán, y en 2017 el Bundestag aprobó por unanimidad exigir memoria, archivos y una Gedenkstätte (Sitio de Memoria binacional).\n\nHoy, la comuna de Parral y las agrupaciones de familiares del Maule se encuentran en el centro de un debate memorial de alcance mundial: la recuperación de los terrenos para erigir un espacio de dignidad humana, educación y verdad histórica sin fines turísticos ni comerciales.',
   },
+  {
+    id: 'art-fosas-retiro-televisores',
+    imagen: 'https://upload.wikimedia.org/wikipedia/commons/d/d2/Fosas_en_Colonia_Dignidad_01.JPG',
+    imagenCredito: 'Peritajes forenses judiciales SML y PDI en Parral',
+    titulo: 'La Operación Retiro de Televisores en Parral: La orden secreta de Pinochet para desenterrar y calcinar los cuerpos',
+    resumen: 'Investigación judicial sobre la maquinaria pesada, las fosas del río Perquilauquén y el testimonio clave de Gerhard Mücke.',
+    categoria: 'Archivo',
+    autor: 'Equipo de Investigación Histórica',
+    fecha: '2026-02-15',
+    contenido:
+      'En noviembre de 1978, el hallazgo fortuito de los restos de quince campesinos en los antiguos hornos de cal de Lonquén provocó una conmoción nacional e internacional que desbarató la tesis de la dictadura sobre los «presuntos desaparecidos».\n\nAnte el temor a nuevos descubrimientos que expusieran al régimen, Augusto Pinochet ordenó una directiva militar confidencial a nivel nacional denominada en clave «Operación Retiro de Televisores». La misión: ubicar todas las fosas clandestinas del país donde se hubiesen inhumado prisioneros políticos, desenterrar los cadáveres y destruirlos por completo.\n\nEn Colonia Dignidad, la orden fue ejecutada con frialdad y disciplina militar. Colonos del círculo de hierro de Schäfer —entre ellos Gerhard Mücke y Rudolf Koffel— operaron las retroexcavadoras pesadas del enclave en las quebradas cercanas al río Perquilauquén. Durante noches enteras removieron las fosas comunes. Apilaron maderas nativas, neumáticos y vertieron toneladas de combustible y acelerantes químicos fosforados.\n\nLas hogueras ardieron durante días hasta convertir los restos óseos en cenizas. Luego, utilizando palas y cribas metálicas, recogieron los residuos calcinados y los lanzaron a la corriente del río Perquilauquén, mientras arrojaban la tierra removida a otras quebradas.\n\nDécadas después, los peritajes científicos dirigidos por el ministro en visita extraordinaria Jorge Zepeda Arancibia, junto al Servicio Médico Legal, peritos de la Policía de Investigaciones y arqueólogos forenses, lograron ubicar más de 30 fosas periciadas. En el lecho de tierra quemada se recuperaron dientes calcinados, proyectiles balísticos de armas de guerra reglamentarias, restos de ropa descompuesta y fragmentos de objetos personales que constituyen hoy prueba judicial irrefutable ante los tribunales chilenos e internacionales.',
+  },
+  {
+    id: 'art-cuartel-carrera-pinto-parral',
+    imagen: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Familiares_de_detenidos_desaparecidos_en_Chile.jpg',
+    imagenCredito: 'Familiares de Parral y Linares en manifestación por la memoria',
+    titulo: 'De Cuartel de Torturas a Monumento Nacional: El inmueble de Ignacio Carrera Pinto 262 en Parral',
+    resumen: 'Cómo la perseverancia de las agrupaciones de familiares del Maule logró proteger la casa que unió a la DINA con Colonia Dignidad.',
+    categoria: 'Noticia',
+    autor: 'Equipo editorial',
+    fecha: '2026-01-20',
+    contenido:
+      'A solo cuadras del centro de Parral, en la calle Ignacio Carrera Pinto N° 262, una casona de fachada continua albergó entre 1974 y 1977 uno de los secretos más oscuros de la inteligencia militar: el cuartel de la Brigada de Inteligencia Regional Sur de la DINA.\n\nEl inmueble pertenecía formalmente a la Sociedad Benefactora y Educacional Dignidad y fue cedido directamente a los mandos de la DINA como base de operaciones. Por sus habitaciones pasaron decenas de prisioneros políticos secuestrados en las provincias de Linares, Talca, Ñuble y Concepción antes de ser derivados a los subterráneos del enclave precordillerano o asesinados.\n\nDurante la transición democrática, el inmueble corrió serio riesgo de demolición o alteración comercial para borrar las marcas de su pasado represivo. A partir de 2016, la Agrupación de Familiares de Detenidos Desaparecidos y Ejecutados Políticos de Talca, la Agrupación de Parral y colectivos de derechos humanos del Maule iniciaron una tenaz campaña ciudadana.\n\nEn sesión plenaria del Consejo de Monumentos Nacionales (CMN) se aprobó unánimemente su declaratoria como Monumento Histórico, oficializada por el Ministerio de las Culturas en 2022. La declaratoria protege no solo la edificación física como vestigio material de la alianza criminal entre la DINA y Colonia Dignidad, sino que abre el camino para su consolidación como Casa de la Memoria y Espacio de Encuentro de la comunidad de Parral.',
+  },
+  {
+    id: 'art-laboratorio-quimico-berrios',
+    imagen: 'https://upload.wikimedia.org/wikipedia/commons/4/4f/Escuela_Villa_Baviera.jpg',
+    imagenCredito: 'Instalaciones del enclave donde operaron arsenales y laboratorios',
+    titulo: 'Armas químicas y el laboratorio secreto: El paso del bioquímico de la DINA Eugenio Berríos por Parral',
+    resumen: 'Documentación judicial revela el desarrollo clandestino de gas sarín, toxinas botulínicas y el arsenal militar oculto.',
+    categoria: 'Archivo',
+    autor: 'Equipo de Investigación Histórica',
+    fecha: '2025-11-10',
+    contenido:
+      'Las investigaciones de los ministros Alejandro Madrid y Jorge Zepeda dejaron al descubierto uno de los capítulos más siniestros de la colaboración entre la inteligencia de Augusto Pinochet y los jerarcas alemanes de Colonia Dignidad: la producción de armamento químico y biológico con el «Proyecto Andrea».\n\nEn la segunda mitad de los años 70, el químico de la DINA Eugenio Berríos (quien más tarde fuera asesinado en Uruguay por agentes de inteligencia para evitar que testificara) instaló un laboratorio clandestino al interior del fundo El Lavadero en Parral. Protegido por el aislamiento del enclave y con el apoyo logístico de médicos y técnicos de la secta, Berríos produjo y experimentó con gas sarín, cianuro y toxinas bacterianas destinadas a la eliminación selectiva de opositores dentro y fuera de Chile.\n\nA ello se sumó el hallazgo, en junio de 2005, del mayor arsenal clandestino incautado a particulares en la historia del país: tres depósitos subterráneos blindados con más de 90 toneladas de armamento bélico, incluyendo lanzacohetes LAW antitanque, fusiles de combate automáticos Steyr AUG, ametralladoras pesadas MG3, granadas de fragmentación, explosivos C4 y prensas hidráulicas para la fabricación no autorizada de componentes militares.\n\nEste hallazgo selló la evidencia incontrovertible ante la justicia internacional de que Colonia Dignidad funcionó como una base militar autónoma y estratégica al servicio de la dictadura y del tráfico ilegal de armas en el Cono Sur.',
+  },
 ];
+

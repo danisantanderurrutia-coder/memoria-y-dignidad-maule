@@ -74,11 +74,11 @@ export default function App() {
   const [arte, setArte] = useLocalStorage('mdm:arte', SEED_ARTE);
   const [talleres, setTalleres] = useLocalStorage('mdm:talleres', SEED_TALLERES);
 
-  const [seedVer, setSeedVer] = useLocalStorage('mdm:seedver_v5', 0);
+  const [seedVer, setSeedVer] = useLocalStorage('mdm:seedver_v6', 0);
 
   // Sincronización de migraciones en localStorage
   useEffect(() => {
-    if (seedVer >= 5) return;
+    if (seedVer >= 6) return;
     const merge = <T extends { id: string }>(cur: T[], extra: T[]) => [
       ...cur,
       ...extra.filter((e) => !cur.some((c) => c.id === e.id)),
@@ -90,7 +90,7 @@ export default function App() {
     setSuenos(() => SEED_SUENOS);
     setArte(() => SEED_ARTE);
     setTalleres((c) => merge(c, SEED_TALLERES));
-    setSeedVer(5);
+    setSeedVer(6);
   }, [seedVer, setSitios, setArticulos, setDocumentos, setRegistrosMuseo, setSuenos, setArte, setTalleres, setSeedVer]);
 
   const go = (v: View) => {
