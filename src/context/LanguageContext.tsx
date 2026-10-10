@@ -288,7 +288,7 @@ export const DICTIONARY: Record<Language, Translations> = {
 
     // Library
     libTitle: 'Biblioteca digital y archivo documental',
-    libDesc: 'Informes oficiales, audios, fotografías y expedientes para investigar y preservar la memoria del Maule.',
+    libDesc: 'Informes oficiales, expedientes judiciales, películas, documentales, audios y fotografías para investigar y preservar la memoria del Maule.',
     libSearchPlaceholder: 'Buscar por título, tema o fuente…',
     libAllFormats: 'Todos los formatos',
     libAllTags: 'Todas las etiquetas',
@@ -450,7 +450,7 @@ export const DICTIONARY: Record<Language, Translations> = {
 
     // Library
     libTitle: 'Digital Library & Documentary Archive',
-    libDesc: 'Official reports, audios, photographs and court dossiers to investigate and preserve Maule memory.',
+    libDesc: 'Official reports, court records, films, documentaries, audio recordings, and photographs to research and preserve the memory of Maule.',
     libSearchPlaceholder: 'Search by title, topic or source…',
     libAllFormats: 'All formats',
     libAllTags: 'All tags',
@@ -612,7 +612,7 @@ export const DICTIONARY: Record<Language, Translations> = {
 
     // Library
     libTitle: 'Digitale Bibliothek & Dokumentenarchiv',
-    libDesc: 'Offizielle Berichte, Tondokumente, Fotografien und Gerichtsakten zur Erforschung der Erinnerung der Region Maule.',
+    libDesc: 'Offizielle Berichte, Gerichtsakten, Filme, Dokumentationen, Tondokumente und Fotografien zur Erforschung der Erinnerung der Region Maule.',
     libSearchPlaceholder: 'Nach Titel, Thema oder Quelle suchen…',
     libAllFormats: 'Alle Formate',
     libAllTags: 'Alle Schlagworte',

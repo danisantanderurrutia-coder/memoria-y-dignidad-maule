@@ -364,6 +364,72 @@ export const DIGNIDAD_DOCUMENTOS: Documento[] = [
     fuente: 'Amnesty International Archives',
     url: 'https://www.amnesty.org',
   },
+  {
+    id: 'doc-trailer-colonia-watson',
+    titulo: 'Película «Colonia» (Florian Gallenberger, 2015) — Tráiler Oficial',
+    descripcion:
+      'Largometraje de ficción histórica protagonizado por Emma Watson (Lena) y Daniel Brühl (Daniel), con Michael Nyqvist como Paul Schäfer. Ambientado en 1973, relata la búsqueda desesperada de una joven cuyo novio es secuestrado por la DINA tras el golpe de Estado y trasladado a los túneles y celdas de Colonia Dignidad en Parral.',
+    formato: 'Video',
+    etiquetas: ['Cine', 'Emma Watson', 'Daniel Brühl', 'Colonia Dignidad', 'DINA', 'Ficción Histórica'],
+    anio: 2015,
+    fuente: 'Majestic Filmverleih / Screen Media Films (YouTube Oficial)',
+    url: 'https://www.youtube.com/watch?v=sI91_W9VwJE',
+  },
+  {
+    id: 'doc-trailer-serie-netflix',
+    titulo: 'Serie Documental «Colonia Dignidad: Una secta alemana en Chile» (Netflix / WDR, 2021) — Tráiler Oficial',
+    descripcion:
+      'Aclamada serie documental en 6 episodios coproducida por Netflix, WDR, NDR y Arte. Exhibe material inédito en película de 16mm y video registrado durante más de cuatro décadas por los propios colonos. Aborda el adoctrinamiento infantil de Paul Schäfer, la colaboración con la DINA en torturas y desaparición forzada, y testimonios de víctimas chilenas y alemanas.',
+    formato: 'Video',
+    etiquetas: ['Serie', 'Netflix', 'Documental', 'Colonia Dignidad', 'Archivos Inéditos', 'DINA'],
+    anio: 2021,
+    fuente: 'Netflix Latinoamérica / WDR (YouTube Oficial)',
+    url: 'https://www.youtube.com/watch?v=Gk6Wb8iJ7Lg',
+  },
+  {
+    id: 'doc-trailer-serie-dignidad',
+    titulo: 'Serie «Dignidad» (Amazon Prime Video / Joyn / Mega, 2020) — Tráiler Oficial',
+    descripcion:
+      'Serie de ficción y suspenso político chileno-alemana en 8 episodios creada por María Elena Wood y Patricio Pereira. Ambientada en 1997, dramatiza la compleja investigación judicial y policial liderada por el joven fiscal Leo Ramírez para desmantelar la red de impunidad y capturar a Paul Schäfer.',
+    formato: 'Video',
+    etiquetas: ['Serie', 'Amazon Prime', 'Thriller', 'Colonia Dignidad', 'Justicia', 'Mega'],
+    anio: 2020,
+    fuente: 'Invercine & Wood / Mega / Joyn (YouTube Oficial)',
+    url: 'https://www.youtube.com/watch?v=qT_Rz0a2dC4',
+  },
+  {
+    id: 'doc-trailer-casa-lobo',
+    titulo: 'Largometraje «La Casa Lobo» (The Wolf House / Cristóbal León & Joaquín Cociña, 2018) — Tráiler Oficial',
+    descripcion:
+      'Película chilena de animación stop-motion aclamada internacionalmente y galardonada con el Premio Caligari en la Berlinale. Inspirada en la atmósfera siniestra de Colonia Dignidad, narra la huida de María, una joven que escapa del enclave y se refugia en una casa del bosque que muta constantemente.',
+    formato: 'Video',
+    etiquetas: ['Cine', 'Animación Stop-Motion', 'Berlinale', 'Arte', 'Memoria'],
+    anio: 2018,
+    fuente: 'Diluvio Producciones / Festival de Berlín (YouTube Oficial)',
+    url: 'https://www.youtube.com/watch?v=7DcL62n9i2M',
+  },
+  {
+    id: 'doc-trailer-cantos-represion',
+    titulo: 'Documental «Cantos de Represión» (Songs of Repression, 2020) — Tráiler Oficial',
+    descripcion:
+      'Documental danés-chileno dirigido por Marianne Hougen-Moraga y Estephan Wagner (Gran Premio CPH:DOX). Retrata el complejo presente de los residentes de la actual «Villa Baviera», los cantos folclóricos alemanes como coraza psicológica y la difícil convivencia entre víctimas de abusos y exjerarcas.',
+    formato: 'Video',
+    etiquetas: ['Documental', 'CPH:DOX', 'Villa Baviera', 'Trauma Colectivo', 'Memoria'],
+    anio: 2020,
+    fuente: 'Final Cut for Real / CPH:DOX (YouTube Oficial)',
+    url: 'https://www.youtube.com/watch?v=U0q2Q6vQp5Y',
+  },
+  {
+    id: 'doc-trailer-pacto-adriana',
+    titulo: 'Documental «El Pacto de Adriana» (Lissette Orozco, 2017) — Tráiler Oficial',
+    descripcion:
+      'Documental chileno premiado internacionalmente sobre los secretos de Adriana Rivas, secretaria de Manuel Contreras en la Dirección de Inteligencia Nacional (DINA). Expone la estructura de cuarteles clandestinos de exterminio y la búsqueda de justicia ciudadana.',
+    formato: 'Video',
+    etiquetas: ['Documental', 'DINA', 'Justicia', 'Derechos Humanos'],
+    anio: 2017,
+    fuente: 'Salmón Producciones (YouTube Oficial)',
+    url: 'https://www.youtube.com/watch?v=r_Gk6xY1y3M',
+  },
 ];
 
 // =========================================================================

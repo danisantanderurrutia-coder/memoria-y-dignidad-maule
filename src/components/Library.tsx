@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react';
-import { Search, FileText, Headphones, Image as Img, Film, Download, ExternalLink } from 'lucide-react';
+import { Search, FileText, Headphones, Image as Img, Film, Download, ExternalLink, Play } from 'lucide-react';
 import { Documento, FormatoDoc } from '../types';
 import { useLanguage } from '../context/LanguageContext';
+import { youtubeEmbed } from '../lib/meta';
 import Modal from './Modal';
 
 const FORMATOS: FormatoDoc[] = ['PDF', 'Audio', 'Fotografía', 'Video'];
@@ -25,12 +26,70 @@ export default function Library({ docs }: { docs: Documento[] }) {
     );
   }, [docs, q, formato, tag]);
 
+  const quickFilterVideo = () => {
+    setFormato('Video');
+    setTag('');
+  };
+
+  const quickFilterPdf = () => {
+    setFormato('PDF');
+    setTag('');
+  };
+
+  const quickFilterAudio = () => {
+    setFormato('Audio');
+    setTag('');
+  };
+
+  const quickFilterAll = () => {
+    setFormato('');
+    setTag('');
+    setQ('');
+  };
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
       <h1 className="font-serif text-3xl font-semibold text-zinc-50">{t.libTitle}</h1>
       <p className="mt-2 max-w-2xl text-zinc-400">{t.libDesc}</p>
 
-      <div className="mt-6 grid gap-3 md:grid-cols-[1fr_200px_220px]">
+      {/* Botones de Acceso Rápido por Tipo de Material */}
+      <div className="mt-5 flex flex-wrap items-center gap-2 text-xs">
+        <span className="font-semibold text-zinc-500 mr-1">{lang === 'de' ? 'Schnellfilter:' : lang === 'en' ? 'Quick filters:' : 'Filtro rápido:'}</span>
+        <button
+          onClick={quickFilterAll}
+          className={`rounded-full px-3 py-1 font-semibold transition ${
+            !formato && !tag && !q ? 'bg-terra-500 text-white' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
+          }`}
+        >
+          {t.filterAll} ({docs.length})
+        </button>
+        <button
+          onClick={quickFilterVideo}
+          className={`flex items-center gap-1.5 rounded-full px-3 py-1 font-semibold transition ${
+            formato === 'Video' ? 'bg-terra-500 text-white' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
+          }`}
+        >
+          <Film size={13} /> {lang === 'de' ? 'Cine, Series & Dokus' : lang === 'en' ? 'Movies & Series' : 'Cine, Series & Tráilers'} ({docs.filter((d) => d.formato === 'Video').length})
+        </button>
+        <button
+          onClick={quickFilterPdf}
+          className={`flex items-center gap-1.5 rounded-full px-3 py-1 font-semibold transition ${
+            formato === 'PDF' ? 'bg-terra-500 text-white' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
+          }`}
+        >
+          <FileText size={13} /> {lang === 'de' ? 'Offizielle Berichte & Akten' : lang === 'en' ? 'Official Reports (PDF)' : 'Informes y Expedientes (PDF)'} ({docs.filter((d) => d.formato === 'PDF').length})
+        </button>
+        <button
+          onClick={quickFilterAudio}
+          className={`flex items-center gap-1.5 rounded-full px-3 py-1 font-semibold transition ${
+            formato === 'Audio' ? 'bg-terra-500 text-white' : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
+          }`}
+        >
+          <Headphones size={13} /> {lang === 'de' ? 'Audio & Zeitzeugen' : lang === 'en' ? 'Audio Recordings' : 'Audios & Testimonios'} ({docs.filter((d) => d.formato === 'Audio').length})
+        </button>
+      </div>
+
+      <div className="mt-4 grid gap-3 md:grid-cols-[1fr_200px_220px]">
         <div className="relative">
           <label htmlFor="lib-q" className="sr-only">Buscar documentos</label>
           <Search size={16} className="absolute left-3 top-3 text-zinc-500" aria-hidden />
@@ -56,13 +115,23 @@ export default function Library({ docs }: { docs: Documento[] }) {
       <ul className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((d) => {
           const I = ICON[d.formato];
+          const isVideo = d.formato === 'Video';
           return (
             <li key={d.id}>
-              <button onClick={() => setOpen(d)} className="card h-full w-full p-4 text-left transition hover:-translate-y-0.5 hover:border-terra-500">
-                <div className="flex items-center gap-2 text-xs text-ocre-400"><I size={16} /> {d.formato} · {d.anio}</div>
-                <h2 className="mt-2 font-serif text-lg leading-snug text-zinc-50">{d.titulo}</h2>
-                <p className="mt-1 line-clamp-3 text-sm text-zinc-400">{d.descripcion}</p>
-                <div className="mt-3 flex flex-wrap gap-1">
+              <button onClick={() => setOpen(d)} className="card h-full w-full p-4 text-left transition hover:-translate-y-0.5 hover:border-terra-500 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between gap-2 text-xs text-ocre-400">
+                    <span className="flex items-center gap-1.5"><I size={16} /> {d.formato} · {d.anio}</span>
+                    {isVideo && (
+                      <span className="flex items-center gap-1 rounded bg-terra-500/20 px-2 py-0.5 text-[10px] font-bold text-terra-400 border border-terra-500/30">
+                        <Play size={10} className="fill-current" /> {lang === 'de' ? 'Tráiler / Video' : lang === 'en' ? 'Trailer / Video' : 'Tráiler / Video'}
+                      </span>
+                    )}
+                  </div>
+                  <h2 className="mt-2 font-serif text-lg leading-snug text-zinc-50">{d.titulo}</h2>
+                  <p className="mt-1 line-clamp-3 text-sm text-zinc-400">{d.descripcion}</p>
+                </div>
+                <div className="mt-4 flex flex-wrap gap-1">
                   {d.etiquetas.map((t) => <span key={t} className="rounded bg-zinc-800 px-2 py-0.5 text-[11px] text-zinc-300">{t}</span>)}
                 </div>
               </button>
@@ -72,23 +141,54 @@ export default function Library({ docs }: { docs: Documento[] }) {
       </ul>
       {list.length === 0 && <p className="mt-8 text-center text-zinc-500">{t.libNotFound}</p>}
 
-      {open && (
-        <Modal title={open.titulo} onClose={() => setOpen(null)}>
-          <dl className="grid grid-cols-2 gap-3 text-sm">
-            <div><dt className="label">{lang === 'de' ? 'Format' : lang === 'en' ? 'Format' : 'Formato'}</dt><dd>{open.formato}</dd></div>
-            <div><dt className="label">{lang === 'de' ? 'Jahr' : lang === 'en' ? 'Year' : 'Año'}</dt><dd>{open.anio}</dd></div>
-            <div className="col-span-2"><dt className="label">{lang === 'de' ? 'Quelle' : lang === 'en' ? 'Source' : 'Fuente'}</dt><dd>{open.fuente}</dd></div>
-          </dl>
-          <p className="my-4 font-serif leading-relaxed text-zinc-300">{open.descripcion}</p>
-          <div className="mb-5 flex flex-wrap gap-1">
-            {open.etiquetas.map((t) => <span key={t} className="rounded bg-zinc-800 px-2 py-0.5 text-xs">{t}</span>)}
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <a className="btn-primary" href={open.url} target="_blank" rel="noopener noreferrer"><ExternalLink size={16} /> {t.libOpen}</a>
-            <a className="btn-ghost" href={open.url} target="_blank" rel="noopener noreferrer" download><Download size={16} /> {t.libDownload}</a>
-          </div>
-        </Modal>
-      )}
+      {open && (() => {
+        const videoEmbed = youtubeEmbed(open.url);
+        return (
+          <Modal title={open.titulo} onClose={() => setOpen(null)}>
+            {videoEmbed && (
+              <div className="mb-5 aspect-video w-full overflow-hidden rounded-xl border border-zinc-700 bg-black shadow-lg">
+                <iframe
+                  src={videoEmbed}
+                  title={open.titulo}
+                  className="h-full w-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            )}
+            <dl className="grid grid-cols-2 gap-3 text-sm">
+              <div>
+                <dt className="label">{lang === 'de' ? 'Format' : lang === 'en' ? 'Format' : 'Formato'}</dt>
+                <dd className="flex items-center gap-1.5 font-semibold text-zinc-200">
+                  {open.formato === 'Video' && <Film size={14} className="text-terra-400" />} {open.formato}
+                </dd>
+              </div>
+              <div>
+                <dt className="label">{lang === 'de' ? 'Jahr' : lang === 'en' ? 'Year' : 'Año'}</dt>
+                <dd className="font-semibold text-zinc-200">{open.anio}</dd>
+              </div>
+              <div className="col-span-2">
+                <dt className="label">{lang === 'de' ? 'Quelle / Produzent' : lang === 'en' ? 'Source / Producer' : 'Fuente / Producción'}</dt>
+                <dd className="text-zinc-300">{open.fuente}</dd>
+              </div>
+            </dl>
+            <p className="my-4 font-serif leading-relaxed text-zinc-300">{open.descripcion}</p>
+            <div className="mb-5 flex flex-wrap gap-1">
+              {open.etiquetas.map((t) => <span key={t} className="rounded bg-zinc-800 px-2 py-0.5 text-xs text-zinc-300">{t}</span>)}
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <a className="btn-primary" href={open.url} target="_blank" rel="noopener noreferrer">
+                <ExternalLink size={16} /> {open.formato === 'Video' ? (lang === 'de' ? 'Auf YouTube ansehen' : lang === 'en' ? 'Watch on YouTube' : 'Ver en YouTube') : t.libOpen}
+              </a>
+              {open.formato !== 'Video' && (
+                <a className="btn-ghost" href={open.url} target="_blank" rel="noopener noreferrer" download>
+                  <Download size={16} /> {t.libDownload}
+                </a>
+              )}
+            </div>
+          </Modal>
+        );
+      })()}
     </div>
   );
 }
