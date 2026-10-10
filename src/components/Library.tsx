@@ -1,12 +1,14 @@
 import { useMemo, useState } from 'react';
 import { Search, FileText, Headphones, Image as Img, Film, Download, ExternalLink } from 'lucide-react';
 import { Documento, FormatoDoc } from '../types';
+import { useLanguage } from '../context/LanguageContext';
 import Modal from './Modal';
 
 const FORMATOS: FormatoDoc[] = ['PDF', 'Audio', 'Fotografía', 'Video'];
 const ICON = { PDF: FileText, Audio: Headphones, Fotografía: Img, Video: Film } as const;
 
 export default function Library({ docs }: { docs: Documento[] }) {
+  const { lang, t } = useLanguage();
   const [q, setQ] = useState('');
   const [formato, setFormato] = useState<FormatoDoc | ''>('');
   const [tag, setTag] = useState('');
@@ -25,32 +27,32 @@ export default function Library({ docs }: { docs: Documento[] }) {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
-      <h1 className="font-serif text-3xl font-semibold text-zinc-50">Biblioteca digital y archivo documental</h1>
-      <p className="mt-2 max-w-2xl text-zinc-400">Informes oficiales, audios, fotografías y expedientes para investigar y preservar la memoria del Maule.</p>
+      <h1 className="font-serif text-3xl font-semibold text-zinc-50">{t.libTitle}</h1>
+      <p className="mt-2 max-w-2xl text-zinc-400">{t.libDesc}</p>
 
       <div className="mt-6 grid gap-3 md:grid-cols-[1fr_200px_220px]">
         <div className="relative">
           <label htmlFor="lib-q" className="sr-only">Buscar documentos</label>
           <Search size={16} className="absolute left-3 top-3 text-zinc-500" aria-hidden />
-          <input id="lib-q" className="input pl-9" placeholder="Buscar por título, tema o fuente…" value={q} onChange={(e) => setQ(e.target.value)} />
+          <input id="lib-q" className="input pl-9" placeholder={t.libSearchPlaceholder} value={q} onChange={(e) => setQ(e.target.value)} />
         </div>
         <div>
           <label htmlFor="lib-f" className="sr-only">Formato</label>
           <select id="lib-f" className="input" value={formato} onChange={(e) => setFormato(e.target.value as FormatoDoc | '')}>
-            <option value="">Todos los formatos</option>
+            <option value="">{t.libAllFormats}</option>
             {FORMATOS.map((f) => <option key={f}>{f}</option>)}
           </select>
         </div>
         <div>
           <label htmlFor="lib-t" className="sr-only">Etiqueta</label>
           <select id="lib-t" className="input" value={tag} onChange={(e) => setTag(e.target.value)}>
-            <option value="">Todas las etiquetas</option>
+            <option value="">{t.libAllTags}</option>
             {tags.map((t) => <option key={t}>{t}</option>)}
           </select>
         </div>
       </div>
 
-      <p className="mt-4 text-xs text-zinc-500" aria-live="polite">{list.length} documento(s)</p>
+      <p className="mt-4 text-xs text-zinc-500" aria-live="polite">{list.length} {t.libCount}</p>
       <ul className="mt-2 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((d) => {
           const I = ICON[d.formato];
@@ -68,22 +70,22 @@ export default function Library({ docs }: { docs: Documento[] }) {
           );
         })}
       </ul>
-      {list.length === 0 && <p className="mt-8 text-center text-zinc-500">No se encontraron documentos.</p>}
+      {list.length === 0 && <p className="mt-8 text-center text-zinc-500">{t.libNotFound}</p>}
 
       {open && (
         <Modal title={open.titulo} onClose={() => setOpen(null)}>
           <dl className="grid grid-cols-2 gap-3 text-sm">
-            <div><dt className="label">Formato</dt><dd>{open.formato}</dd></div>
-            <div><dt className="label">Año</dt><dd>{open.anio}</dd></div>
-            <div className="col-span-2"><dt className="label">Fuente</dt><dd>{open.fuente}</dd></div>
+            <div><dt className="label">{lang === 'de' ? 'Format' : lang === 'en' ? 'Format' : 'Formato'}</dt><dd>{open.formato}</dd></div>
+            <div><dt className="label">{lang === 'de' ? 'Jahr' : lang === 'en' ? 'Year' : 'Año'}</dt><dd>{open.anio}</dd></div>
+            <div className="col-span-2"><dt className="label">{lang === 'de' ? 'Quelle' : lang === 'en' ? 'Source' : 'Fuente'}</dt><dd>{open.fuente}</dd></div>
           </dl>
           <p className="my-4 font-serif leading-relaxed text-zinc-300">{open.descripcion}</p>
           <div className="mb-5 flex flex-wrap gap-1">
             {open.etiquetas.map((t) => <span key={t} className="rounded bg-zinc-800 px-2 py-0.5 text-xs">{t}</span>)}
           </div>
           <div className="flex flex-wrap gap-2">
-            <a className="btn-primary" href={open.url} target="_blank" rel="noopener noreferrer"><ExternalLink size={16} /> Abrir / leer</a>
-            <a className="btn-ghost" href={open.url} target="_blank" rel="noopener noreferrer" download><Download size={16} /> Descargar</a>
+            <a className="btn-primary" href={open.url} target="_blank" rel="noopener noreferrer"><ExternalLink size={16} /> {t.libOpen}</a>
+            <a className="btn-ghost" href={open.url} target="_blank" rel="noopener noreferrer" download><Download size={16} /> {t.libDownload}</a>
           </div>
         </Modal>
       )}

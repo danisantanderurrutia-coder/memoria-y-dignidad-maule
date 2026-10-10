@@ -274,6 +274,61 @@ export const EXHIBITION_PANELS: ExhibitionPanel[] = [
       { title: 'Agrupación de Familiares del Maule', url: 'https://www.memoriaviva.com', org: 'DDHH Maule' },
     ],
   },
+  {
+    id: 'panel-6-brigada-regional-sur',
+    number: '06',
+    title: {
+      es: 'Brigada de Inteligencia Regional Sur de la DINA (1974–1977)',
+      en: 'DINA Southern Regional Intelligence Brigade (1974–1977)',
+      de: 'DINA Regionale Geheimdienstbrigade Süd (1974–1977)',
+    },
+    subtitle: {
+      es: 'La unidad secreta de la DINA, el cuartel de Ignacio Carrera Pinto 262 en Parral y su articulación orgánica con Colonia Dignidad',
+      en: 'The clandestine DINA operative unit, the Parral headquarters at Ignacio Carrera Pinto 262, and its coordination with Colonia Dignidad',
+      de: 'Die geheime DINA-Operationseinheit, der Stützpunkt in Parral (Ignacio Carrera Pinto 262) und das Terror-Netzwerk mit Colonia Dignidad',
+    },
+    badge: {
+      es: '1974–1977 · Terrorismo de Estado y Represión Regional',
+      en: '1974–1977 · State Terrorism & Regional Repression',
+      de: '1974–1977 · Staatsterrorismus & Regionale Verfolgung',
+    },
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Familiares_de_detenidos_desaparecidos_en_Chile.jpg',
+    imageCaption: {
+      es: 'Agrupaciones de familiares del Maule frente a los centros de detención y el Cuartel de la Brigada Sur en Parral.',
+      en: 'Maule human rights collectives marching outside detention hubs and the Southern Brigade Parral base.',
+      de: 'Angehörigeninitiativen aus der Region Maule im Protest vor Haftorten und der DINA-Kaserne in Parral.',
+    },
+    leadText: {
+      es: 'Entre 1974 y 1977, la Dirección de Inteligencia Nacional (DINA) desplegó en las provincias del centro-sur del país la «Brigada de Inteligencia Regional Sur», comandada por el mayor de Ejército Fernando Gómez Segovia (alias «El Padrino»). Su base operativa clandestina funcionó en la casona urbana de calle Ignacio Carrera Pinto N° 262 en Parral, un inmueble de fachada continua cedido formalmente por la Sociedad Benefactora y Educacional Dignidad de Paul Schäfer. Desde este cuartel general y conectados por antenas de radio con los búnkeres de Colonia Dignidad, agentes de la DINA y colonos coordinaron la persecución, interrogatorios bajo tortura y desaparición sistemática de militantes del MIR, Partido Socialista, Partido Comunista y dirigentes campesinos del Maule y Biobío, operando como centro de acopio y antesala del exterminio en el fundo El Lavadero.',
+      en: 'Between 1974 and 1977, Pinochet’s secret police (DINA) operated the "Southern Regional Intelligence Brigade" (Brigada de Inteligencia Regional Sur) across south-central Chile, commanded by Army Major Fernando Gómez Segovia (alias "El Padrino"). Its clandestine headquarters was established in the town of Parral at Ignacio Carrera Pinto 262—a property formally owned and made available by Paul Schäfer’s "Beneficent and Educational Society Dignity". Linked via high-frequency radio transmitters directly to Colonia Dignidad’s underground bunkers, DINA agents and sect operatives orchestrated abductions, severe torture, and forced disappearances of leftist dissidents, labor leaders, and peasant activists from Maule, Biobío, and Concepción, using the urban house as a sorting and transit facility before execution in the Andean enclave.',
+      de: 'Zwischen 1974 und 1977 unterhielt die chilenische Geheimpolizei DINA im südlichen Zentralchile die „Regionale Geheimdienstbrigade Süd“ (Brigada de Inteligencia Regional Sur), befehligt von Heeresmajor Fernando Gómez Segovia (Deckname „El Padrino“). Ihre geheime Operationsbasis lag mitten im Stadtgebiet von Parral in der Calle Ignacio Carrera Pinto 262 – einer Liegenschaft, die offiziell der „Wohltätigkeits- und Bildungsgemeinschaft Würde“ von Paul Schäfer gehörte und der DINA überlassen wurde. Über Kurzwellenfunk direkt mit den Bunkern der Colonia Dignidad verbunden, koordinierte diese Brigade Festnahmen, grausame Folterungen und das gewaltsame Verschwindenlassen von MIR-, Sozialisten-, Kommunisten- und Bauernführern aus den Regionen Maule und Biobío als Drehscheibe vor der endgültigen Verschleppung in die Enklave.',
+    },
+    keyFacts: {
+      es: [
+        'Comandada por Fernando Gómez Segovia («El Padrino»), subordinado directo del director de la DINA Manuel Contreras Sepúlveda.',
+        'La casona de Ignacio Carrera Pinto 262 en Parral fue declarada Monumento Histórico Nacional por el Estado chileno en 2022.',
+        'Servía de puente operativo directo entre los centros de secuestro del Maule/Biobío y los subterráneos de tortura de Schäfer.',
+        'Antenas y equipos de radiocomunicación suministrados y operados por especialistas técnicos alemanes de la secta.',
+      ],
+      en: [
+        'Commanded by Major Fernando Gómez Segovia ("El Padrino"), answering directly to DINA chief Manuel Contreras.',
+        'The compound at Ignacio Carrera Pinto 262 in Parral was declared a National Historical Monument by Chile in 2022.',
+        'Functioned as the operational pipeline transferring abducted dissidents from Maule/Biobío directly into Schäfer’s compound.',
+        'High-frequency radio communications were installed and serviced by German technical specialists from the sect.',
+      ],
+      de: [
+        'Kommandiert von Major Fernando Gómez Segovia („El Padrino“), direkt unterstellt unter DINA-Chef Manuel Contreras.',
+        'Das Anwesen Ignacio Carrera Pinto 262 in Parral wurde 2022 vom chilenischen Staat zum Nationalen Historischen Denkmal erklärt.',
+        'Fungierte als operative Brücke für die Verschleppung von Gefangenen aus Maule und Biobío in die Folterkeller der Kolonie.',
+        'Sende- und Fernmeldetechnik wurde von deutschen Technikern der Sekte eingerichtet und gewartet.',
+      ],
+    },
+    sources: [
+      { title: 'Decreto N° 16 Monumento Histórico Cuartel Parral (2022)', url: 'https://www.monumentos.gob.cl', org: 'CMN Chile' },
+      { title: 'Causa Rol 2.182-98 (Ministro Jorge Zepeda)', url: 'https://www.pjud.cl', org: 'Poder Judicial de Chile' },
+      { title: 'Ficha Cuartel Parral DINA Brigada Sur', url: 'https://www.memoriaviva.com', org: 'Memoria Viva' },
+    ],
+  },
 ];
 
 interface Props {
@@ -291,7 +346,7 @@ export default function ColoniaDignidadExhibition({ onIrAlSitioEnMapa }: Props) 
       badge: 'Exposición Especial Internacional · Parral & Colonia Dignidad',
       mainTitle: 'Colonia Dignidad: Enclave Nazi, Dictadura y Memoria Binacional',
       mainSubtitle: 'Dossier documental y paneles curatoriales para presentaciones y conferencias en Alemania y Europa',
-      curatedPanels: 'Paneles Curatoriales (1–5)',
+      curatedPanels: 'Paneles Curatoriales (1–6)',
       keyEvidence: 'Evidencias y Hechos Comprobados',
       judicialSources: 'Fuentes Oficiales y Archivos de Estado',
       viewSiteOnMap: 'Ver Fosas y Recinto en el Mapa',
@@ -303,7 +358,7 @@ export default function ColoniaDignidadExhibition({ onIrAlSitioEnMapa }: Props) 
       badge: 'Special International Exhibition · Parral & Colonia Dignidad',
       mainTitle: 'Colonia Dignidad: Nazi Enclave, Dictatorship & Binational Memory',
       mainSubtitle: 'Curatorial documentary dossier designed for conferences and exhibitions in Germany and Europe',
-      curatedPanels: 'Curatorial Panels (1–5)',
+      curatedPanels: 'Curatorial Panels (1–6)',
       keyEvidence: 'Key Forensic & Historical Evidence',
       judicialSources: 'Official State Archives & Court Rulings',
       viewSiteOnMap: 'View Graves & Compound on Map',
@@ -315,7 +370,7 @@ export default function ColoniaDignidadExhibition({ onIrAlSitioEnMapa }: Props) 
       badge: 'Sonderausstellung International · Parral & Colonia Dignidad',
       mainTitle: 'Colonia Dignidad: NS-Enklave, Diktatur & Deutsch-Chilenische Verantwortung',
       mainSubtitle: 'Dokumentarisches Dossier und Ausstellungstafeln für Vorträge und Gedenkveranstaltungen in Deutschland und Europa',
-      curatedPanels: 'Kuratierte Ausstellungstafeln (1–5)',
+      curatedPanels: 'Kuratierte Ausstellungstafeln (1–6)',
       keyEvidence: 'Historische & Forensische Schlüsselfakten',
       judicialSources: 'Offizielle Staatsakten & Gerichtsurteile',
       viewSiteOnMap: 'Ort & Gräber auf der Karte anzeigen',
@@ -384,7 +439,7 @@ export default function ColoniaDignidadExhibition({ onIrAlSitioEnMapa }: Props) 
           <BookOpen size={20} className="text-terra-500" /> {tExhibition.curatedPanels}
         </h2>
 
-        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2.5">
           {EXHIBITION_PANELS.map((p) => {
             const isActive = p.id === activePanelId;
             return (
@@ -432,7 +487,13 @@ export default function ColoniaDignidadExhibition({ onIrAlSitioEnMapa }: Props) 
           <div className="flex items-center gap-2">
             {onIrAlSitioEnMapa && (
               <button
-                onClick={() => onIrAlSitioEnMapa('fosas-perquilauquen-parral')}
+                onClick={() =>
+                  onIrAlSitioEnMapa(
+                    activePanel.id === 'panel-6-brigada-regional-sur'
+                      ? 'dina-parral-carrera-pinto'
+                      : 'fosas-perquilauquen-parral'
+                  )
+                }
                 className="btn-ghost text-xs py-2 px-3 border border-zinc-700 hover:border-terra-500 text-zinc-300 hover:text-terra-400"
               >
                 <MapPin size={14} /> {tExhibition.viewSiteOnMap}

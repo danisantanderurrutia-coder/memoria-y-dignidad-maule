@@ -69,18 +69,14 @@ export default function Landing({ go }: { go: (v: Dest) => void }) {
           <span>
             <div className="flex items-center gap-2">
               <b className="block font-serif text-xl text-zinc-50 group-hover:text-terra-400">
-                {lang === 'de' ? 'Sonderausstellung: Colonia Dignidad, NS-Netzwerke & Diktatur' : lang === 'en' ? 'Special Exhibition: Colonia Dignidad, Nazi Networks & Dictatorship' : 'Exposición Especial: Colonia Dignidad, Redes Nazis y Dictadura'}
+                {t.landingCardExhibitionTitle}
               </b>
               <span className="rounded-full bg-terra-500/20 px-2.5 py-0.5 text-xs font-bold text-terra-300 border border-terra-500/30">
-                Parral · DE/EN/ES
+                {t.landingCardExhibitionTag}
               </span>
             </div>
             <span className="mt-1.5 block text-sm text-zinc-300">
-              {lang === 'de'
-                ? 'Kuratierte Ausstellungstafeln für Vorträge und Gedenkveranstaltungen in Europa: Paul Schäfers Flucht aus der BRD, DINA-Folterzentrum, Operation Fernseher-Rückzug am Rio Perquilauquén, deutsches diplomatisches Versagen und Beschluss des Deutschen Bundestages.'
-                : lang === 'en'
-                ? 'Curated international panels for exhibitions in Europe: Schäfer’s escape from West Germany, secret DINA torture command, clandestine graves by the Perquilauquén River, German diplomatic complicity, and the German Bundestag resolution.'
-                : 'Dossier y paneles curatoriales para conferencias y exposiciones en Europa: fuga de Alemania en 1961, cuartel de la DINA en Parral, fosas comunes del río Perquilauquén, complicidad consular del BND y resoluciones del Bundestag alemán.'}
+              {t.landingCardExhibitionDesc}
             </span>
           </span>
         </button>
@@ -88,9 +84,9 @@ export default function Landing({ go }: { go: (v: Dest) => void }) {
         <button onClick={() => go('suenos')} className="card group flex items-start gap-3.5 p-5 text-left transition hover:border-terra-500 hover:shadow-md">
           <Sparkles className="mt-1 h-6 w-6 shrink-0 text-terra-500 group-hover:scale-110 transition-transform" />
           <span>
-            <b className="block font-serif text-lg text-zinc-50 group-hover:text-terra-500">Los Sueños que Construían</b>
+            <b className="block font-serif text-lg text-zinc-50 group-hover:text-terra-500">{t.landingCardSuenosTitle}</b>
             <span className="mt-1 block text-sm text-zinc-400">
-              Oficios de antaño, asentamientos de la Reforma Agraria, peñas parroquiales y la alegría compartida antes del silencio.
+              {t.landingCardSuenosDesc}
             </span>
           </span>
         </button>
@@ -98,9 +94,9 @@ export default function Landing({ go }: { go: (v: Dest) => void }) {
         <button onClick={() => go('arte')} className="card group flex items-start gap-3.5 p-5 text-left transition hover:border-ocre-500 hover:shadow-md">
           <Palette className="mt-1 h-6 w-6 shrink-0 text-ocre-600 group-hover:scale-110 transition-transform" />
           <span>
-            <b className="block font-serif text-lg text-zinc-50 group-hover:text-terra-500">Arte y Derechos Universales</b>
+            <b className="block font-serif text-lg text-zinc-50 group-hover:text-terra-500">{t.landingCardArteTitle}</b>
             <span className="mt-1 block text-sm text-zinc-400">
-              Murales barriales georreferenciados, décimas campesinas y rap maulino por la dignidad de las comunidades.
+              {t.landingCardArteDesc}
             </span>
           </span>
         </button>
@@ -108,9 +104,9 @@ export default function Landing({ go }: { go: (v: Dest) => void }) {
         <button onClick={() => go('talleres')} className="card group flex items-start gap-3.5 p-5 text-left transition hover:border-teal-600 hover:shadow-md">
           <BookOpenCheck className="mt-1 h-6 w-6 shrink-0 text-teal-700 group-hover:scale-110 transition-transform" />
           <span>
-            <b className="block font-serif text-lg text-zinc-50 group-hover:text-terra-500">Talleres Comunitarios</b>
+            <b className="block font-serif text-lg text-zinc-50 group-hover:text-terra-500">{t.landingCardTalleresTitle}</b>
             <span className="mt-1 block text-sm text-zinc-400">
-              Guías metodológicas descargables e imprimibles: Cartografía familiar («El mapa de tus abuelos»), arpilleras y notas de voz.
+              {t.landingCardTalleresDesc}
             </span>
           </span>
         </button>
@@ -118,9 +114,9 @@ export default function Landing({ go }: { go: (v: Dest) => void }) {
         <button onClick={() => go('museo')} className="card group flex items-start gap-3.5 p-5 text-left transition hover:border-terra-500 hover:shadow-md">
           <Landmark className="mt-1 h-6 w-6 shrink-0 text-terra-500 group-hover:scale-110 transition-transform" />
           <span>
-            <b className="block font-serif text-lg text-zinc-50 group-hover:text-terra-500">Museo Digital</b>
+            <b className="block font-serif text-lg text-zinc-50 group-hover:text-terra-500">{t.landingCardMuseoTitle}</b>
             <span className="mt-1 block text-sm text-zinc-400">
-              Galería interactiva con fotografías de archivo, momentos, prensa histórica y relatos narrados con voz.
+              {t.landingCardMuseoDesc}
             </span>
           </span>
         </button>
@@ -128,9 +124,9 @@ export default function Landing({ go }: { go: (v: Dest) => void }) {
         <button onClick={() => go('blog')} className="card group flex items-start gap-3.5 p-5 text-left transition hover:border-ocre-500 hover:shadow-md">
           <Newspaper className="mt-1 h-6 w-6 shrink-0 text-ocre-500 group-hover:scale-110 transition-transform" />
           <span>
-            <b className="block font-serif text-lg text-zinc-50 group-hover:text-terra-500">Noticias & Crónicas</b>
+            <b className="block font-serif text-lg text-zinc-50 group-hover:text-terra-500">{t.landingCardBlogTitle}</b>
             <span className="mt-1 block text-sm text-zinc-400">
-              Doble columna: noticias y contingencia regional a la izquierda, crónicas y testimonios en profundidad a la derecha.
+              {t.landingCardBlogDesc}
             </span>
           </span>
         </button>
@@ -138,9 +134,9 @@ export default function Landing({ go }: { go: (v: Dest) => void }) {
         <button onClick={() => go('biblioteca')} className="card group flex items-start gap-3.5 p-5 text-left transition hover:border-teal-600 hover:shadow-md">
           <Library className="mt-1 h-6 w-6 shrink-0 text-teal-700 group-hover:scale-110 transition-transform" />
           <span>
-            <b className="block font-serif text-lg text-zinc-50 group-hover:text-terra-500">Biblioteca Digital</b>
+            <b className="block font-serif text-lg text-zinc-50 group-hover:text-terra-500">{t.landingCardLibraryTitle}</b>
             <span className="mt-1 block text-sm text-zinc-400">
-              Informes oficiales Rettig, Valech, expedientes judiciales y documentos históricos para descarga libre.
+              {t.landingCardLibraryDesc}
             </span>
           </span>
         </button>

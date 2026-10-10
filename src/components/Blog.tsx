@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { ArrowLeft, MessageSquare, Newspaper, BookOpen, Clock, Calendar, User } from 'lucide-react';
 import { Articulo, Comentario } from '../types';
 import { fmtFecha, uid } from '../lib/meta';
+import { useLanguage } from '../context/LanguageContext';
 
 interface Props {
   articulos: Articulo[];
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export default function Blog({ articulos, comentarios, setComentarios }: Props) {
+  const { lang, t } = useLanguage();
   const [openId, setOpenId] = useState<string | null>(null);
 
   // Clasificación: Noticias a la izquierda, Crónicas y Archivo/Testimonios a la derecha
@@ -30,10 +32,10 @@ export default function Blog({ articulos, comentarios, setComentarios }: Props) 
     <div className="mx-auto max-w-7xl px-4 py-8">
       <div className="mb-8 border-b border-zinc-800 pb-5">
         <h1 className="font-serif text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">
-          Noticias & Crónicas
+          {t.blogTitle}
         </h1>
         <p className="mt-2 text-zinc-400">
-          Archivo vivo de memoria territorial: a la izquierda, el acontecer y notas informativas; a la derecha, crónicas de largo aliento, testimonios y rescate histórico.
+          {t.blogDesc}
         </p>
       </div>
 
@@ -43,10 +45,10 @@ export default function Blog({ articulos, comentarios, setComentarios }: Props) 
           <div className="flex items-center gap-2 border-b-2 border-terra-500 pb-2">
             <Newspaper className="h-6 w-6 text-terra-500" />
             <h2 id="noticias-heading" className="font-serif text-2xl font-semibold text-zinc-50">
-              Noticias
+              {t.blogNewsTab}
             </h2>
             <span className="ml-auto rounded-full bg-terra-500/10 px-2.5 py-0.5 text-xs font-semibold text-terra-500">
-              {noticias.length} notas
+              {noticias.length} {lang === 'de' ? 'Berichte' : lang === 'en' ? 'notes' : 'notas'}
             </span>
           </div>
 
@@ -60,7 +62,7 @@ export default function Blog({ articulos, comentarios, setComentarios }: Props) 
               />
             ))}
             {noticias.length === 0 && (
-              <p className="py-8 text-center text-sm text-zinc-500">No hay noticias registradas por el momento.</p>
+              <p className="py-8 text-center text-sm text-zinc-500">{t.blogNoNews}</p>
             )}
           </div>
         </section>
@@ -70,10 +72,10 @@ export default function Blog({ articulos, comentarios, setComentarios }: Props) 
           <div className="flex items-center gap-2 border-b-2 border-ocre-500 pb-2">
             <BookOpen className="h-6 w-6 text-ocre-500" />
             <h2 id="cronicas-heading" className="font-serif text-2xl font-semibold text-zinc-50">
-              Crónicas & Testimonios
+              {t.blogChroniclesTab}
             </h2>
             <span className="ml-auto rounded-full bg-ocre-500/10 px-2.5 py-0.5 text-xs font-semibold text-ocre-500">
-              {cronicas.length} relatos
+              {cronicas.length} {lang === 'de' ? 'Beiträge' : lang === 'en' ? 'stories' : 'relatos'}
             </span>
           </div>
 
@@ -87,7 +89,7 @@ export default function Blog({ articulos, comentarios, setComentarios }: Props) 
               />
             ))}
             {cronicas.length === 0 && (
-              <p className="py-8 text-center text-sm text-zinc-500">No hay crónicas registradas por el momento.</p>
+              <p className="py-8 text-center text-sm text-zinc-500">{t.blogNoChronicles}</p>
             )}
           </div>
         </section>
@@ -97,6 +99,7 @@ export default function Blog({ articulos, comentarios, setComentarios }: Props) 
 }
 
 function ArticleCard({ articulo, comentariosCount, onSelect }: { articulo: Articulo; comentariosCount: number; onSelect: () => void }) {
+  const { t } = useLanguage();
   return (
     <article className="card group overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:border-terra-500 hover:shadow-md">
       {articulo.imagen && (
@@ -137,11 +140,11 @@ function ArticleCard({ articulo, comentariosCount, onSelect }: { articulo: Artic
 
         <div className="mt-4 flex items-center justify-between border-t border-zinc-800 pt-3 text-xs">
           <button onClick={onSelect} className="font-semibold text-terra-500 hover:underline">
-            Leer artículo completo →
+            {t.blogReadFull}
           </button>
           <span className="inline-flex items-center gap-1 text-zinc-400">
             <MessageSquare size={13} />
-            {comentariosCount} {comentariosCount === 1 ? 'comentario' : 'comentarios'}
+            {comentariosCount} {t.blogComments}
           </span>
         </div>
       </div>
@@ -155,6 +158,7 @@ function Lectura({
   comentarios,
   setComentarios,
 }: { articulo: Articulo; onBack: () => void } & Pick<Props, 'comentarios' | 'setComentarios'>) {
+  const { lang, t } = useLanguage();
   const [autor, setAutor] = useState('');
   const [texto, setTexto] = useState('');
   const [enviado, setEnviado] = useState(false);
@@ -168,7 +172,7 @@ function Lectura({
       {
         id: uid('c'),
         articuloId: a.id,
-        autor: autor.trim() || 'Anónimo',
+        autor: autor.trim() || (lang === 'de' ? 'Anonym' : lang === 'en' ? 'Anonymous' : 'Anónimo'),
         texto: texto.trim(),
         fecha: new Date().toISOString(),
         estado: 'pendiente',
@@ -182,7 +186,7 @@ function Lectura({
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
       <button className="btn-ghost mb-6" onClick={onBack}>
-        <ArrowLeft size={16} /> Volver a Noticias & Crónicas
+        <ArrowLeft size={16} /> {t.blogBackBtn}
       </button>
 
       <article>
@@ -191,7 +195,7 @@ function Lectura({
           <span>•</span>
           <span>{fmtFecha(a.fecha)}</span>
           <span>•</span>
-          <span>Por {a.autor}</span>
+          <span>{lang === 'de' ? 'Von' : lang === 'en' ? 'By' : 'Por'} {a.autor}</span>
         </div>
 
         <h1 className="mt-3 font-serif text-3xl font-bold leading-tight text-zinc-50 sm:text-4xl">
@@ -207,7 +211,7 @@ function Lectura({
             <img src={a.imagen} alt={a.titulo} className="max-h-[460px] w-full object-cover" />
             {a.imagenCredito && (
               <figcaption className="p-2 text-center text-xs text-zinc-400">
-                Foto: {a.imagenCredito} (Unsplash)
+                {lang === 'de' ? 'Foto:' : lang === 'en' ? 'Photo:' : 'Foto:'} {a.imagenCredito}
               </figcaption>
             )}
           </figure>
@@ -222,7 +226,7 @@ function Lectura({
 
       <section className="mt-14 border-t border-zinc-800 pt-8" aria-labelledby="com-h">
         <h2 id="com-h" className="font-serif text-2xl font-bold text-zinc-50">
-          Comentarios ciudadanos ({aprobados.length})
+          {t.blogCitizenComments} ({aprobados.length})
         </h2>
         <ul className="mt-5 space-y-3">
           {aprobados.map((c) => (
@@ -235,32 +239,32 @@ function Lectura({
           ))}
           {aprobados.length === 0 && (
             <li className="card border-dashed p-6 text-center text-sm text-zinc-500">
-              Aún no hay comentarios aprobados para esta publicación. ¡Sé el primero en aportar una reflexión!
+              {t.blogNoApprovedComments}
             </li>
           )}
         </ul>
 
         <form onSubmit={enviar} className="card mt-8 space-y-4 p-5">
-          <h3 className="font-serif text-lg font-semibold text-zinc-50">Deja tu comentario o reflexión</h3>
+          <h3 className="font-serif text-lg font-semibold text-zinc-50">{t.blogLeaveComment}</h3>
           <div>
-            <label className="label" htmlFor="c-autor">Nombre o alias (opcional)</label>
+            <label className="label" htmlFor="c-autor">{t.blogCommentName}</label>
             <input
               id="c-autor"
               className="input"
               value={autor}
               maxLength={60}
-              placeholder="Ej: Vecina de Talca"
+              placeholder={t.blogCommentAuthorPlaceholder}
               onChange={(e) => setAutor(e.target.value)}
             />
           </div>
           <div>
-            <label className="label" htmlFor="c-texto">Comentario</label>
+            <label className="label" htmlFor="c-texto">{lang === 'de' ? 'Kommentar' : lang === 'en' ? 'Comment' : 'Comentario'}</label>
             <textarea
               id="c-texto"
               className="input min-h-28"
               required
               maxLength={800}
-              placeholder="Escribe tu reflexión, memoria o aporte sobre este tema..."
+              placeholder={t.blogCommentText}
               value={texto}
               onChange={(e) => {
                 setTexto(e.target.value);
@@ -269,11 +273,11 @@ function Lectura({
             />
           </div>
           <button className="btn-primary" type="submit">
-            Enviar comentario para moderación
+            {t.blogCommentSend}
           </button>
           {enviado && (
             <p role="status" className="rounded bg-amber-50 p-2 text-sm text-amber-900 border border-amber-200">
-              Gracias por tu aporte. Tu comentario ha sido recibido y pasará a revisión del equipo antes de ser publicado.
+              {t.blogCommentSuccess}
             </p>
           )}
         </form>

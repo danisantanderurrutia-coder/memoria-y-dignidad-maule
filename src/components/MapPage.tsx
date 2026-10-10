@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Filter, RotateCcw } from 'lucide-react';
 import { Epoca, Provincia, Sitio, TipoSitio } from '../types';
 import { EPOCAS, PROVINCIAS, TIPOS } from '../lib/meta';
+import { useLanguage } from '../context/LanguageContext';
 import MapView from './MapView';
 import SitePanel from './SitePanel';
 
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export default function MapPage({ sitios, initialSelectedId }: Props) {
+  const { lang, t } = useLanguage();
   const [epoca, setEpoca] = useState<Epoca | ''>('');
   const [provincia, setProvincia] = useState<Provincia | ''>('');
   const [tipo, setTipo] = useState<TipoSitio | ''>('');
@@ -32,28 +34,73 @@ export default function MapPage({ sitios, initialSelectedId }: Props) {
 
   const reset = () => { setEpoca(''); setProvincia(''); setTipo(''); };
 
+  // Translated epoch label function
+  const getEpocaLabel = (k: Epoca) => {
+    if (lang === 'de') {
+      const deLabels: Record<Epoca, string> = {
+        pre: 'Agrarreform & Vor-Diktatur',
+        dictadura: 'Zivil-Militärische Diktatur',
+        transicion: 'Post-Diktatur / Übergang',
+        revuelta: 'Soziale Revolte von Oktober',
+      };
+      return `${deLabels[k]} (${EPOCAS[k].rango})`;
+    }
+    if (lang === 'en') {
+      const enLabels: Record<Epoca, string> = {
+        pre: 'Agrarian Reform & Pre-dictatorship',
+        dictadura: 'Civic-Military Dictatorship',
+        transicion: 'Post-dictatorship / Transition',
+        revuelta: 'Popular Uprising',
+      };
+      return `${enLabels[k]} (${EPOCAS[k].rango})`;
+    }
+    return `${EPOCAS[k].label} (${EPOCAS[k].rango})`;
+  };
+
+  const getTipoLabel = (k: TipoSitio) => {
+    if (lang === 'de') {
+      const deTipos: Record<TipoSitio, string> = {
+        detencion: 'Haft- & Folterzentrum',
+        memorial: 'Mahnmal / Öffentlicher Raum',
+        conflicto: 'Sozialer Konflikt / Widerstand',
+        colonia: 'Colonia Dignidad',
+      };
+      return deTipos[k];
+    }
+    if (lang === 'en') {
+      const enTipos: Record<TipoSitio, string> = {
+        detencion: 'Detention / Torture Center',
+        memorial: 'Memorial / Public Space',
+        conflicto: 'Social Conflict / Resistance',
+        colonia: 'Colonia Dignidad',
+      };
+      return enTipos[k];
+    }
+    return TIPOS[k].label;
+  };
+
   return (
     <div className="flex h-full flex-col md:flex-row">
       <section aria-label="Filtros del mapa" className="border-b border-zinc-800 bg-white md:w-72 md:shrink-0 md:overflow-y-auto md:border-b-0 md:border-r">
         <div className="flex items-center justify-between p-3 md:hidden">
           <button className="btn-ghost" aria-expanded={showFilters} onClick={() => setShowFilters((v) => !v)}>
-            <Filter size={16} /> Filtros{activos ? ` (${activos})` : ''}
+            <Filter size={16} /> {t.filterTitle}{activos ? ` (${activos})` : ''}
           </button>
-          <span className="text-xs text-zinc-400" aria-live="polite">{filtrados.length} sitios</span>
+          <span className="text-xs text-zinc-400" aria-live="polite">{filtrados.length} {t.filterCount}</span>
         </div>
         <div className={`${showFilters ? 'block' : 'hidden'} space-y-5 p-4 md:block`}>
           <div className="hidden items-center justify-between md:flex">
-            <h2 className="font-serif text-lg text-zinc-50 font-bold">Filtrar sitios</h2>
-            <span className="text-xs text-zinc-400" aria-live="polite">{filtrados.length} de {sitios.length}</span>
+            <h2 className="font-serif text-lg text-zinc-50 font-bold">{t.filterTitle}</h2>
+            <span className="text-xs text-zinc-400" aria-live="polite">{filtrados.length} {lang === 'de' ? 'von' : lang === 'en' ? 'of' : 'de'} {sitios.length}</span>
           </div>
 
           {/* Acceso Rápido Destacado: Ruta Parral & Colonia Dignidad */}
           <div className="rounded-lg border border-terra-500/40 bg-terra-950/20 p-3 text-xs">
             <div className="flex items-center justify-between font-bold text-terra-400">
-              <span>Ruta Parral & Colonia Dignidad</span>
-              <span className="rounded bg-terra-500/20 px-1.5 py-0.5 text-[10px]">Especial</span>
+              <span>{t.routeParralTitle}</span>
+              <span className="rounded bg-terra-500/20 px-1.5 py-0.5 text-[10px]">{t.routeParralTag}</span>
             </div>
-            <p className="mt-1 text-zinc-400">Fosas clandestinas, cuarteles DINA y red de túneles en Parral.</p>
+            <p className="mt-1 text-zinc-400">{t.routeParralDesc}</p>
             <button
               onClick={() => {
                 setProvincia('Linares');
@@ -61,41 +108,41 @@ export default function MapPage({ sitios, initialSelectedId }: Props) {
               }}
               className="mt-2 w-full rounded bg-terra-600 px-2 py-1 text-center font-semibold text-white shadow-sm hover:bg-terra-500 transition"
             >
-              Ver Enclave y Fosas Parral
+              {t.routeParralBtn}
             </button>
           </div>
 
           <fieldset>
-            <legend className="label">Época histórica</legend>
+            <legend className="label">{t.filterEpoch}</legend>
             <div className="space-y-1">
-              <Radio name="epoca" checked={epoca === ''} onChange={() => setEpoca('')} label="Todas" />
+              <Radio name="epoca" checked={epoca === ''} onChange={() => setEpoca('')} label={t.filterAll} />
               {(Object.keys(EPOCAS) as Epoca[]).map((k) => (
-                <Radio key={k} name="epoca" checked={epoca === k} onChange={() => setEpoca(k)} label={`${EPOCAS[k].label} (${EPOCAS[k].rango})`} dot={EPOCAS[k].color} />
+                <Radio key={k} name="epoca" checked={epoca === k} onChange={() => setEpoca(k)} label={getEpocaLabel(k)} dot={EPOCAS[k].color} />
               ))}
             </div>
           </fieldset>
 
           <div>
-            <label className="label" htmlFor="f-prov">Provincia</label>
+            <label className="label" htmlFor="f-prov">{t.filterProvince}</label>
             <select id="f-prov" className="input" value={provincia} onChange={(e) => setProvincia(e.target.value as Provincia | '')}>
-              <option value="">Todas</option>
+              <option value="">{t.filterAll}</option>
               {PROVINCIAS.map((p) => <option key={p}>{p}</option>)}
             </select>
           </div>
 
           <div>
-            <label className="label" htmlFor="f-tipo">Tipo de sitio</label>
+            <label className="label" htmlFor="f-tipo">{t.filterType}</label>
             <select id="f-tipo" className="input" value={tipo} onChange={(e) => setTipo(e.target.value as TipoSitio | '')}>
-              <option value="">Todos</option>
-              {(Object.keys(TIPOS) as TipoSitio[]).map((k) => <option key={k} value={k}>{TIPOS[k].label}</option>)}
+              <option value="">{t.filterAll}</option>
+              {(Object.keys(TIPOS) as TipoSitio[]).map((k) => <option key={k} value={k}>{getTipoLabel(k)}</option>)}
             </select>
           </div>
 
-          <button className="btn-ghost w-full" onClick={reset} disabled={!activos}><RotateCcw size={14} /> Limpiar filtros</button>
+          <button className="btn-ghost w-full" onClick={reset} disabled={!activos}><RotateCcw size={14} /> {t.filterReset}</button>
 
           <div className="border-t border-zinc-800 pt-3 text-xs text-zinc-500">
-            <p className="mb-1 font-medium text-zinc-400">Leyenda</p>
-            <p>El color indica la época; la letra, el tipo de sitio (D, M, R, C).</p>
+            <p className="mb-1 font-medium text-zinc-400">{t.filterLegend}</p>
+            <p>{t.filterLegendDesc}</p>
           </div>
 
           <ul className="space-y-1" aria-label="Lista de sitios filtrados">
@@ -106,7 +153,7 @@ export default function MapPage({ sitios, initialSelectedId }: Props) {
                 </button>
               </li>
             ))}
-            {filtrados.length === 0 && <li className="text-xs text-zinc-500">Ningún sitio coincide con los filtros.</li>}
+            {filtrados.length === 0 && <li className="text-xs text-zinc-500">{t.filterEmpty}</li>}
           </ul>
         </div>
       </section>

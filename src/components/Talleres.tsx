@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { BookOpenCheck, Clock, Users, Wrench, Printer, CheckCircle2, HelpCircle, ArrowRight, Lightbulb } from 'lucide-react';
 import { TallerComunitario } from '../types';
+import { useLanguage } from '../context/LanguageContext';
 import Modal from './Modal';
 
 export default function Talleres({ talleres }: { talleres: TallerComunitario[] }) {
+  const { lang, t } = useLanguage();
   const [activeTaller, setActiveTaller] = useState<TallerComunitario | null>(null);
 
   const imprimirGuia = () => {
@@ -15,14 +17,13 @@ export default function Talleres({ talleres }: { talleres: TallerComunitario[] }
       {/* Encabezado */}
       <header className="mb-8 border-b border-zinc-800 pb-6">
         <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-teal-700">
-          <BookOpenCheck size={16} /> Pedagogía de la Memoria & Caja de Herramientas
+          <BookOpenCheck size={16} /> {t.talleresBadge}
         </div>
         <h1 className="mt-2 font-serif text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">
-          Talleres y Metodologías Comunitarias
+          {t.talleresTitle}
         </h1>
         <p className="mt-3 max-w-3xl font-serif text-base leading-relaxed text-zinc-400">
-          Orientado a docentes, profesoras rurales, asambleas de barrio, clubes de adulto mayor y colectivos de jóvenes.
-          Metodologías paso a paso, listas para llevar a la práctica, fotocopiar o descargar e imprimir con materiales sencillos.
+          {t.talleresDesc}
         </p>
       </header>
 
@@ -54,14 +55,16 @@ export default function Talleres({ talleres }: { talleres: TallerComunitario[] }
               {/* Materiales destacados */}
               <div className="mt-4 rounded-md border border-zinc-800 bg-stone-100/70 p-3 text-xs">
                 <span className="font-semibold text-zinc-300 flex items-center gap-1 mb-1.5">
-                  <Wrench size={13} className="text-teal-700" /> Materiales requeridos:
+                  <Wrench size={13} className="text-teal-700" /> {t.talleresMaterials}
                 </span>
                 <ul className="space-y-1 text-zinc-400 list-disc list-inside">
                   {taller.materiales.slice(0, 3).map((mat, i) => (
                     <li key={i} className="truncate">{mat}</li>
                   ))}
                   {taller.materiales.length > 3 && (
-                    <li className="italic text-zinc-500">+ {taller.materiales.length - 3} más...</li>
+                    <li className="italic text-zinc-500">
+                      + {taller.materiales.length - 3} {lang === 'de' ? 'weitere…' : lang === 'en' ? 'more…' : 'más…'}
+                    </li>
                   )}
                 </ul>
               </div>
@@ -72,7 +75,7 @@ export default function Talleres({ talleres }: { talleres: TallerComunitario[] }
                 onClick={() => setActiveTaller(taller)}
                 className="btn-primary text-xs w-full justify-between"
               >
-                <span>Ver pauta y preguntas guía</span>
+                <span>{lang === 'de' ? 'Leitfaden & Leitfragen ansehen' : lang === 'en' ? 'View guide & trigger questions' : 'Ver pauta y preguntas guía'}</span>
                 <ArrowRight size={15} />
               </button>
             </div>
@@ -89,10 +92,10 @@ export default function Talleres({ talleres }: { talleres: TallerComunitario[] }
               <p className="font-serif text-sm italic text-zinc-400">{activeTaller.subtitulo}</p>
               <div className="mt-3 flex flex-wrap gap-2 text-xs">
                 <span className="rounded bg-teal-100 px-2 py-0.5 font-bold text-teal-800">
-                  Nivel: {activeTaller.nivel}
+                  {lang === 'de' ? 'Zielgruppe:' : lang === 'en' ? 'Level:' : 'Nivel:'} {activeTaller.nivel}
                 </span>
                 <span className="rounded bg-zinc-800 px-2 py-0.5 text-zinc-300">
-                  Duración: {activeTaller.duracion}
+                  {lang === 'de' ? 'Dauer:' : lang === 'en' ? 'Duration:' : 'Duración:'} {activeTaller.duracion}
                 </span>
               </div>
             </div>
@@ -100,20 +103,20 @@ export default function Talleres({ talleres }: { talleres: TallerComunitario[] }
             {/* Botón de Impresión / Descarga PDF */}
             <div className="flex items-center justify-between rounded-lg border border-teal-200 bg-teal-50/70 p-3 no-print">
               <span className="text-xs font-medium text-teal-900">
-                ¿Deseas llevar esta guía a tu sala de clases o reunión vecinal?
+                {lang === 'de' ? 'Möchten Sie diese Anleitung im Unterricht oder Treffen nutzen?' : lang === 'en' ? 'Would you like to bring this guide to your classroom or meeting?' : '¿Deseas llevar esta guía a tu sala de clases o reunión vecinal?'}
               </span>
               <button
                 onClick={imprimirGuia}
                 className="btn-primary py-1.5 text-xs inline-flex items-center gap-1.5"
               >
-                <Printer size={15} /> Imprimir / Guardar en PDF
+                <Printer size={15} /> {t.talleresPrintPdf}
               </button>
             </div>
 
             {/* Objetivo del Taller */}
             <div className="rounded-lg bg-white/40 p-4 border border-zinc-700">
               <h3 className="text-xs font-bold uppercase tracking-wider text-teal-800 flex items-center gap-1.5">
-                <Lightbulb size={15} /> Objetivo Comunitario
+                <Lightbulb size={15} /> {t.talleresObjective}
               </h3>
               <p className="mt-1 font-serif text-sm leading-relaxed text-zinc-200">{activeTaller.objetivo}</p>
             </div>
@@ -121,7 +124,7 @@ export default function Talleres({ talleres }: { talleres: TallerComunitario[] }
             {/* Materiales Completos */}
             <div>
               <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2 flex items-center gap-1.5">
-                <Wrench size={15} /> Lista de Materiales Simples
+                <Wrench size={15} /> {lang === 'de' ? 'Benötigte Hilfsmittel & Materialien' : lang === 'en' ? 'Materials List' : 'Lista de Materiales Simples'}
               </h3>
               <ul className="grid gap-2 sm:grid-cols-2 text-xs">
                 {activeTaller.materiales.map((m, idx) => (
@@ -136,7 +139,7 @@ export default function Talleres({ talleres }: { talleres: TallerComunitario[] }
             {/* Paso a Paso */}
             <div className="space-y-4">
               <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-400">
-                Paso a Paso de la Metodología
+                {t.talleresSteps}
               </h3>
               {activeTaller.pasosList.map((paso, idx) => (
                 <div key={idx} className="rounded-lg border border-zinc-700 bg-white/50 p-4 shadow-sm">
@@ -147,7 +150,7 @@ export default function Talleres({ talleres }: { talleres: TallerComunitario[] }
                   {paso.preguntasGuia && paso.preguntasGuia.length > 0 && (
                     <div className="mt-3 rounded border border-amber-200 bg-amber-50/70 p-3">
                       <p className="text-xs font-bold text-amber-900 flex items-center gap-1 mb-1">
-                        <HelpCircle size={13} /> Preguntas detonantes recomendadas:
+                        <HelpCircle size={13} /> {lang === 'de' ? 'Empfohlene Anstoßfragen:' : lang === 'en' ? 'Recommended prompt questions:' : 'Preguntas detonantes recomendadas:'}
                       </p>
                       <ul className="list-disc list-inside space-y-1 text-xs italic text-amber-950 font-serif">
                         {paso.preguntasGuia.map((preg, pidx) => (
@@ -163,7 +166,7 @@ export default function Talleres({ talleres }: { talleres: TallerComunitario[] }
             {/* Consejos Pedagógicos y Éticos */}
             <div className="rounded-lg border border-zinc-700 bg-stone-100/60 p-4">
               <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">
-                Recomendaciones pedagógicas y de cuidado
+                {t.talleresAdvice}
               </h3>
               <ul className="space-y-1.5 text-xs text-zinc-300 list-disc list-inside">
                 {activeTaller.consejosPedagogicos.map((c, idx) => (
