@@ -1,7 +1,7 @@
 {
-  "name": "Memoria y Dignidad Maule - Museo Digital",
-  "short_name": "Memoria Maule",
-  "description": "Museo virtual de memoria histórica y derechos humanos de la Región del Maule, Chile.",
+  "name": "Museo Digital del Maule de la Memoria y los Derechos Humanos",
+  "short_name": "Museo Maule",
+  "description": "Museo Digital del Maule de la Memoria y los Derechos Humanos: archivos populares, memoria territorial y derechos humanos en la Región del Maule, Chile.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

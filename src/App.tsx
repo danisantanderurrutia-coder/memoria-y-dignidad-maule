@@ -74,11 +74,11 @@ export default function App() {
   const [arte, setArte] = useLocalStorage('mdm:arte', SEED_ARTE);
   const [talleres, setTalleres] = useLocalStorage('mdm:talleres', SEED_TALLERES);
 
-  const [seedVer, setSeedVer] = useLocalStorage('mdm:seedver_v8', 0);
+  const [seedVer, setSeedVer] = useLocalStorage('mdm:seedver_v9', 0);
 
   // Sincronización de migraciones en localStorage
   useEffect(() => {
-    if (seedVer >= 8) return;
+    if (seedVer >= 9) return;
     const merge = <T extends { id: string }>(cur: T[], extra: T[]) => [
       ...cur,
       ...extra.filter((e) => !cur.some((c) => c.id === e.id)),
@@ -90,7 +90,7 @@ export default function App() {
     setSuenos(() => SEED_SUENOS);
     setArte(() => SEED_ARTE);
     setTalleres((c) => merge(c, SEED_TALLERES));
-    setSeedVer(8);
+    setSeedVer(9);
   }, [seedVer, setSitios, setArticulos, setDocumentos, setRegistrosMuseo, setSuenos, setArte, setTalleres, setSeedVer]);
 
   const go = (v: View) => {
@@ -153,15 +153,15 @@ export default function App() {
           <button
             onClick={() => go('inicio')}
             className="group flex items-center gap-3.5 text-left transition hover:opacity-90"
-            aria-label="Ir al inicio de Memoria y Dignidad Maule"
+            aria-label="Ir al inicio del Museo Digital del Maule de la Memoria y los Derechos Humanos"
           >
             <img
               src={`${import.meta.env.BASE_URL}logo.svg`}
-              alt="Logo Memoria y Dignidad Maule"
+              alt="Logo Museo Digital del Maule de la Memoria y los Derechos Humanos"
               className="h-12 w-12 sm:h-14 sm:w-14 drop-shadow-sm transition-transform group-hover:scale-105"
             />
             <div>
-              <span className="block font-serif text-xl sm:text-2xl font-bold leading-tight text-zinc-50 group-hover:text-terra-600 transition-colors">
+              <span className="block font-serif text-lg sm:text-xl lg:text-2xl font-bold leading-tight text-zinc-50 group-hover:text-terra-600 transition-colors">
                 {t.siteTitle}
               </span>
               <span className="block text-xs sm:text-sm font-medium text-terra-500">

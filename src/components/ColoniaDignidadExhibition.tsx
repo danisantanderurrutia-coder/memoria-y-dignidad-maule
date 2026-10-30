@@ -577,7 +577,7 @@ export default function ColoniaDignidadExhibition({ onIrAlSitioEnMapa }: Props) 
       {/* Bloque Informativo Final: Memoria Binacional */}
       <div className="mt-8 rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 text-center text-xs text-zinc-400 flex flex-col sm:flex-row items-center justify-between gap-4">
         <span>
-          © Memoria y Dignidad Maule · Dossier de Investigación Colonia Dignidad & Parral · Auswärtiges Amt / Deutscher Bundestag / Poder Judicial de Chile
+          © Museo Digital del Maule de la Memoria y los Derechos Humanos · Dossier de Investigación Colonia Dignidad & Parral · Auswärtiges Amt / Deutscher Bundestag / Poder Judicial de Chile
         </span>
         <button
           onClick={() => {

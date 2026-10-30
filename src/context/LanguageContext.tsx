@@ -171,8 +171,8 @@ export interface Translations {
 
 export const DICTIONARY: Record<Language, Translations> = {
   es: {
-    siteTitle: 'Memoria y Dignidad Maule',
-    siteSubtitle: 'Museo digital de derechos humanos, memorias populares y oficios del Maule',
+    siteTitle: 'Museo Digital del Maule de la Memoria y los Derechos Humanos',
+    siteSubtitle: 'Memoria histórica, derechos humanos, oficios y archivos del territorio maulino',
     navMapa: 'Mapa',
     navSuenos: 'Los Sueños que Construían',
     navArte: 'Arte & Cultura',
@@ -197,7 +197,7 @@ export const DICTIONARY: Record<Language, Translations> = {
     listenSpeech: 'Escuchar relato',
     stopSpeech: 'Detener narración oral',
 
-    landingTitle: 'Memoria y Dignidad Maule',
+    landingTitle: 'Museo Digital del Maule de la Memoria y los Derechos Humanos',
     landingSubtitle: 'Museo Digital & Archivo Comunitario',
     landingDesc: 'Un espacio abierto para recordar, investigar y visibilizar la memoria histórica, los derechos humanos, los oficios populares y las luchas sociales de Talca, Curicó, Linares y Cauquenes.',
     exploreMapBtn: 'Explorar el Mapa Interactivo',
@@ -333,8 +333,8 @@ export const DICTIONARY: Record<Language, Translations> = {
     blogCommentAuthorPlaceholder: 'Ej: Vecina de Talca',
   },
   en: {
-    siteTitle: 'Memory & Dignity Maule',
-    siteSubtitle: 'Digital museum of human rights, popular memories and trades of Maule',
+    siteTitle: 'Maule Digital Museum of Memory and Human Rights',
+    siteSubtitle: 'Historical memory, human rights, popular traditions and regional archives',
     navMapa: 'Map',
     navSuenos: 'Dreams They Built',
     navArte: 'Art & Culture',
@@ -359,7 +359,7 @@ export const DICTIONARY: Record<Language, Translations> = {
     listenSpeech: 'Listen to narration',
     stopSpeech: 'Stop oral narration',
 
-    landingTitle: 'Memory and Dignity Maule',
+    landingTitle: 'Maule Digital Museum of Memory and Human Rights',
     landingSubtitle: 'Digital Museum & Community Archive',
     landingDesc: 'An open space to remember, investigate and highlight historical memory, human rights, traditional crafts and social struggles across Talca, Curicó, Linares and Cauquenes.',
     exploreMapBtn: 'Explore Interactive Map',
@@ -495,8 +495,8 @@ export const DICTIONARY: Record<Language, Translations> = {
     blogCommentAuthorPlaceholder: 'E.g.: Neighbor from Talca',
   },
   de: {
-    siteTitle: 'Erinnerung & Würde Maule',
-    siteSubtitle: 'Digitales Museum für Menschenrechte, Volkskultur und Berufe der Region Maule',
+    siteTitle: 'Digitales Museum Maule für Erinnerung und Menschenrechte',
+    siteSubtitle: 'Historisches Gedächtnis, Menschenrechte, Volkskultur und regionale Archive',
     navMapa: 'Karte',
     navSuenos: 'Die Träume, die sie bauten',
     navArte: 'Kunst & Kultur',
@@ -521,7 +521,7 @@ export const DICTIONARY: Record<Language, Translations> = {
     listenSpeech: 'Erzählung anhören',
     stopSpeech: 'Vorlesen stoppen',
 
-    landingTitle: 'Erinnerung und Würde Maule',
+    landingTitle: 'Digitales Museum Maule für Erinnerung und Menschenrechte',
     landingSubtitle: 'Digitales Museum & Gemeinschaftsarchiv',
     landingDesc: 'Ein offener Raum zur Erforschung und Sichtbarmachung des historischen Gedächtnisses, der Menschenrechte, des traditionellen Handwerks und der sozialen Kämpfe in Talca, Curicó, Linares und Cauquenes (einschließlich der Aufarbeitung der Colonia Dignidad).',
     exploreMapBtn: 'Interaktive Karte erkunden',

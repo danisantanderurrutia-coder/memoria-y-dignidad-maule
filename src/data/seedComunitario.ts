@@ -278,7 +278,7 @@ es su propio sembrador.`,
     descripcion:
       'Composición musical urbana independiente que cruza samplers de payadores curicanos con rimas contemporáneas sobre los derechos laborales de los temporeros agrícolas de la fruta y la defensa del río Mataquito frente a la contaminación industrial.',
     imagenUrl: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Rio_Mataquito_oeste.jpg/1280px-Rio_Mataquito_oeste.jpg',
-    videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    videoUrl: '',
     sitioRelacionadoId: 'curico-ruta5-uribe',
     coordenadas: { lat: -34.9855, lng: -71.2394 },
     contenidoTexto:

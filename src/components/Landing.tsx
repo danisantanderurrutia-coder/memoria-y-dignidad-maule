@@ -19,7 +19,7 @@ export default function Landing({ go }: { go: (v: Dest) => void }) {
     <div className="mx-auto flex min-h-full max-w-6xl flex-col items-center px-4 py-12 text-center">
       <img
         src={logoUrl}
-        alt="Logo de Memoria y Dignidad Maule: sol terracota sobre la cordillera"
+        alt="Logo del Museo Digital del Maule de la Memoria y los Derechos Humanos: sol terracota sobre la cordillera"
         width={128}
         height={128}
         className="fade-in h-28 w-28 drop-shadow-md sm:h-32 sm:w-32"
