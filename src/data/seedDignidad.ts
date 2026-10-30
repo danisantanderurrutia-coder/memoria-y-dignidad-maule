@@ -329,8 +329,8 @@ export const DIGNIDAD_DOCUMENTOS: Documento[] = [
     formato: 'Video',
     etiquetas: ['Cine', 'Emma Watson', 'Daniel Brühl', 'Colonia Dignidad', 'DINA', 'Ficción Histórica'],
     anio: 2015,
-    fuente: 'Majestic Filmverleih / Screen Media Films',
-    url: 'https://www.youtube.com/results?search_query=Colonia+2015+trailer+oficial+Emma+Watson+Daniel+Bruhl',
+    fuente: 'Screen Media Films / Majestic Filmverleih',
+    url: 'https://www.youtube.com/watch?v=UBSMl343fsw',
   },
   {
     id: 'doc-trailer-serie-netflix',
@@ -341,18 +341,18 @@ export const DIGNIDAD_DOCUMENTOS: Documento[] = [
     etiquetas: ['Serie', 'Netflix', 'Documental', 'Colonia Dignidad', 'Archivos Inéditos', 'DINA'],
     anio: 2021,
     fuente: 'Netflix Latinoamérica / WDR',
-    url: 'https://www.youtube.com/results?search_query=Colonia+Dignidad+una+secta+alemana+en+Chile+Netflix+trailer',
+    url: 'https://www.youtube.com/watch?v=IvbU0ZUFl2w',
   },
   {
     id: 'doc-trailer-serie-dignidad',
-    titulo: 'Serie «Dignidad» (Joyn / Mega / Amazon Prime Video, 2019)',
+    titulo: 'Serie «Dignidad» (Joyn / Mega / Amazon Prime Video, 2019) — Tráiler',
     descripcion:
       'Serie de ficción y suspenso chileno-alemana creada por María Elena Wood y Patricio Pereira. Con saltos temporales hacia fines de los años 90, sigue al joven abogado Leo Ramírez en la investigación para capturar a Paul Schäfer.',
     formato: 'Video',
     etiquetas: ['Serie', 'Amazon Prime', 'Thriller', 'Colonia Dignidad', 'Justicia', 'Mega'],
     anio: 2019,
-    fuente: 'Invercine & Wood / Mega / Joyn',
-    url: 'https://www.youtube.com/results?search_query=serie+Dignidad+Mega+2019+trailer+Colonia+Dignidad',
+    fuente: 'Invercine & Wood / Mega / Joyn / Prime Video',
+    url: 'https://www.youtube.com/watch?v=cYwqJ0AouSU',
   },
   {
     id: 'doc-trailer-casa-lobo',
@@ -363,7 +363,7 @@ export const DIGNIDAD_DOCUMENTOS: Documento[] = [
     etiquetas: ['Cine', 'Animación Stop-Motion', 'Berlinale', 'Arte', 'Memoria'],
     anio: 2018,
     fuente: 'Diluvio Producciones / Festival de Berlín',
-    url: 'https://www.youtube.com/results?search_query=La+Casa+Lobo+The+Wolf+House+trailer+oficial',
+    url: 'https://www.youtube.com/watch?v=EEc3R3Pn0FA',
   },
   {
     id: 'doc-trailer-cantos-represion',
@@ -373,8 +373,8 @@ export const DIGNIDAD_DOCUMENTOS: Documento[] = [
     formato: 'Video',
     etiquetas: ['Documental', 'CPH:DOX', 'Villa Baviera', 'Trauma Colectivo', 'Memoria'],
     anio: 2020,
-    fuente: 'Final Cut for Real / CPH:DOX',
-    url: 'https://www.youtube.com/results?search_query=Songs+of+Repression+Cantos+de+Represion+trailer',
+    fuente: 'Final Cut for Real / CPH:DOX / Market Chile',
+    url: 'https://www.youtube.com/watch?v=9IlpkwkbaJ4',
   },
   {
     id: 'doc-trailer-pacto-adriana',
@@ -384,8 +384,8 @@ export const DIGNIDAD_DOCUMENTOS: Documento[] = [
     formato: 'Video',
     etiquetas: ['Documental', 'DINA', 'Justicia', 'Derechos Humanos'],
     anio: 2017,
-    fuente: 'Salmón Producciones',
-    url: 'https://www.youtube.com/results?search_query=El+Pacto+de+Adriana+trailer+oficial',
+    fuente: 'Salmón Producciones / Storyboard Media',
+    url: 'https://www.youtube.com/watch?v=WC7_GsFckB4',
   },
 ];
 

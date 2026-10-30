@@ -116,6 +116,14 @@ export default function Suenos({ historias }: { historias: HistoriaSueno[] }) {
         <p className="text-sm text-zinc-400">
           {t.suenosDesc}
         </p>
+
+        {/* Aviso de Prototipo Pedagógico */}
+        <div className="mt-3 rounded-lg border border-amber-600/40 bg-amber-950/20 px-3.5 py-2.5 text-xs leading-relaxed text-amber-200">
+          <p>
+            <span className="font-semibold uppercase tracking-wider text-amber-400">Nota: </span>
+            {t.suenosPrototypeNotice}
+          </p>
+        </div>
       </header>
 
       <div
@@ -231,9 +239,14 @@ export default function Suenos({ historias }: { historias: HistoriaSueno[] }) {
         {/* Ficha Descriptiva Profunda (Panel Derecho) */}
         <article className="card flex flex-col p-5" aria-live="polite">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-xs font-semibold uppercase tracking-wide text-terra-500">
-              {actual.categoria}
-            </p>
+            <div className="flex items-center gap-2">
+              <p className="text-xs font-semibold uppercase tracking-wide text-terra-500">
+                {actual.categoria}
+              </p>
+              <span className="rounded-full border border-amber-600/40 bg-amber-950/40 px-2 py-0.5 text-[10px] font-medium text-amber-300">
+                {t.suenosPrototypeBadge}
+              </span>
+            </div>
             <span className="rounded-full bg-stone-200 px-2 py-0.5 text-[11px] font-medium text-zinc-700">
               Territorio {actual.territorioTipo}
             </span>

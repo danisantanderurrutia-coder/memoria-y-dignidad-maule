@@ -25,6 +25,12 @@ export default function Talleres({ talleres }: { talleres: TallerComunitario[] }
         <p className="mt-3 max-w-3xl font-serif text-base leading-relaxed text-zinc-400">
           {t.talleresDesc}
         </p>
+        <div className="mt-3 rounded-lg border border-teal-600/30 bg-teal-950/20 px-3.5 py-2.5 text-xs leading-relaxed text-teal-200">
+          <p>
+            <span className="font-semibold uppercase tracking-wider text-teal-400">Guías Abiertas: </span>
+            {t.talleresPrototypeNotice}
+          </p>
+        </div>
       </header>
 
       {/* Grid de Fichas de Talleres */}

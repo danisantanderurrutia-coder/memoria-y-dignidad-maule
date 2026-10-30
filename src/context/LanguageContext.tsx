@@ -52,12 +52,16 @@ export interface Translations {
   suenosDream: string;
   suenosCelebrated: string;
   suenosFlavorSound: string;
+  suenosPrototypeNotice: string;
+  suenosPrototypeBadge: string;
 
   arteBadge: string;
   arteTitle: string;
   arteDesc: string;
   artePoetryTitle: string;
   arteDeclaim: string;
+  artePrototypeNotice: string;
+  artePrototypeBadge: string;
 
   talleresBadge: string;
   talleresTitle: string;
@@ -67,6 +71,7 @@ export interface Translations {
   talleresObjective: string;
   talleresSteps: string;
   talleresAdvice: string;
+  talleresPrototypeNotice: string;
 
   museoTitle: string;
   museoDesc: string;
@@ -217,12 +222,16 @@ export const DICTIONARY: Record<Language, Translations> = {
     suenosDream: '¿Qué soñaban?',
     suenosCelebrated: '¿Cómo celebraban?',
     suenosFlavorSound: 'Sabor y sonido del encuentro',
+    suenosPrototypeNotice: 'Espacio de Prototipo Pedagógico: Las siguientes fichas corresponden a prototipos demostrativos para ilustrar cómo se organizará el archivo de vidas, oficios y celebraciones populares una vez que las comunidades del Maule incorporen testimonios orales y archivos familiares reales.',
+    suenosPrototypeBadge: 'Prototipo de Muestra',
 
     arteBadge: 'Expresión, Dignidad y Derechos Humanos Universales',
     arteTitle: 'Arte, Memoria y Cultura',
     arteDesc: 'Murales comunitarios en los barrios maulinos, décimas campesinas que desafiaron el silencio y rimas urbanas por la dignidad humana.',
     artePoetryTitle: 'Texto / Poesía / Lira Popular',
     arteDeclaim: 'Escuchar lectura / declamación',
+    artePrototypeNotice: 'Espacio de Muestra Cultural y Artística: Registro prototipo elaborado para modelar la futura fototeca y fonoteca comunitaria del Maule. Si eres autor o custodio de obras de arte popular maulino, puedes aportar el registro original en «Archivo Abierto».',
+    artePrototypeBadge: 'Muestra Demostrativa',
 
     talleresBadge: 'Pedagogía de la Memoria & Caja de Herramientas',
     talleresTitle: 'Talleres y Metodologías Comunitarias',
@@ -232,6 +241,7 @@ export const DICTIONARY: Record<Language, Translations> = {
     talleresObjective: 'Objetivo Comunitario',
     talleresSteps: 'Paso a Paso de la Metodología',
     talleresAdvice: 'Recomendaciones pedagógicas y de cuidado',
+    talleresPrototypeNotice: 'Caja de Herramientas Pedagógicas: Guías de trabajo comunitario y metodologías abiertas diseñadas para docentes, asambleas barriales y colectivos juveniles de memoria.',
 
     museoTitle: 'Museo Digital',
     museoDesc: 'Fotografías, documentos, portadas de prensa y videos con su relato. Usa el menú flotante, las flechas del teclado o desliza para recorrer.',
@@ -379,12 +389,16 @@ export const DICTIONARY: Record<Language, Translations> = {
     suenosDream: 'What did they dream of?',
     suenosCelebrated: 'How did they celebrate?',
     suenosFlavorSound: 'Flavor & sound of communion',
+    suenosPrototypeNotice: 'Pedagogical Prototype Space: The following entries are demonstrative prototypes illustrating how the living archive of everyday trades, oral memories, and community celebrations will be structured once authentic oral testimonies and family archives are uploaded by Maule communities.',
+    suenosPrototypeBadge: 'Prototype Entry',
 
     arteBadge: 'Expression, Dignity and Universal Human Rights',
     arteTitle: 'Art, Memory and Culture',
     arteDesc: 'Community murals in Maule neighborhoods, peasant verses that defied silence and urban rhymes for human dignity.',
     artePoetryTitle: 'Text / Peasant Verses / Popular Broadsheet',
     arteDeclaim: 'Listen to recitation',
+    artePrototypeNotice: 'Cultural & Artistic Showcase: Demonstrative mockups modeling the future regional community photo and audio archive. If you are an artist or custodian of popular Maule artwork, you can submit original records via «Open Archive».',
+    artePrototypeBadge: 'Demonstrative Showcase',
 
     talleresBadge: 'Pedagogy of Memory & Community Toolkit',
     talleresTitle: 'Workshops & Community Methodologies',
@@ -394,6 +408,7 @@ export const DICTIONARY: Record<Language, Translations> = {
     talleresObjective: 'Community Objective',
     talleresSteps: 'Step by Step Methodology',
     talleresAdvice: 'Pedagogical & Ethical Care Recommendations',
+    talleresPrototypeNotice: 'Pedagogical Toolkit: Open community workshop guides and methodologies designed for educators, neighborhood assemblies, and youth memory collectives.',
 
     museoTitle: 'Digital Museum',
     museoDesc: 'Photographs, archival documents, press headlines and videos with historical accounts. Browse with floating menu, keys or swipe.',
@@ -541,12 +556,16 @@ export const DICTIONARY: Record<Language, Translations> = {
     suenosDream: 'Wovon träumten sie?',
     suenosCelebrated: 'Wie feierten sie?',
     suenosFlavorSound: 'Geschmack und Klang der Begegnung',
+    suenosPrototypeNotice: 'Pädagogischer Prototyp-Bereich: Die folgenden Einträge sind illustrative Muster, die veranschaulichen, wie das Archiv für traditionelles Handwerk, Lebensgeschichten und Gemeinschaftsfeste strukturiert wird, sobald authentische Zeitzeugenberichte und Familienarchive aus der Region Maule eingepflegt werden.',
+    suenosPrototypeBadge: 'Prototyp-Muster',
 
     arteBadge: 'Ausdruck, Würde und universelle Menschenrechte',
     arteTitle: 'Kunst, Erinnerung und Kultur',
     arteDesc: 'Gemeinschaftliche Wandmalereien, ländliche Reime gegen das Schweigen und urbane Poesie für die Menschenwürde.',
     artePoetryTitle: 'Text / Bäuerliche Verse / Flugblätter',
     arteDeclaim: 'Rezitation anhören',
+    artePrototypeNotice: 'Kulturelle Werkschau: Anschauungsbeispiele zur Modellierung des künftigen Bild- und Tonarchivs der Region Maule. Kunstschaffende und Nachlassverwalter können Originalwerke über das «Offene Archiv» beitragen.',
+    artePrototypeBadge: 'Demonstrationsmuster',
 
     talleresBadge: 'Pädagogik der Erinnerung & Werkzeugkasten',
     talleresTitle: 'Workshops & Methoden der Gemeinschaft',
@@ -556,6 +575,7 @@ export const DICTIONARY: Record<Language, Translations> = {
     talleresObjective: 'Gemeinschaftsziel',
     talleresSteps: 'Schritt-für-Schritt-Methode',
     talleresAdvice: 'Pädagogische und ethische Empfehlungen',
+    talleresPrototypeNotice: 'Pädagogischer Werkzeugkasten: Offene Methodenleitfäden für Lehrkräfte, Nachbarschaftsinitiativen und Jugendgruppen zur Erinnerungsarbeit.',
 
     museoTitle: 'Digitales Museum',
     museoDesc: 'Fotografien, Archivdokumente, historische Zeitungsberichte und Videos mit Erläuterungen. Blättern Sie mit den Pfeiltasten oder durch Wischen.',

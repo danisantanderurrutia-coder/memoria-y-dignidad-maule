@@ -74,18 +74,16 @@ export default function App() {
   const [arte, setArte] = useLocalStorage('mdm:arte', SEED_ARTE);
   const [talleres, setTalleres] = useLocalStorage('mdm:talleres', SEED_TALLERES);
 
-  const [seedVer, setSeedVer] = useLocalStorage('mdm:seedver_v10', 0);
+  const [seedVer, setSeedVer] = useLocalStorage('mdm:seedver_v11', 0);
 
   // Sincronización de migraciones en localStorage
   useEffect(() => {
-    if (seedVer >= 10) return;
+    if (seedVer >= 11) return;
     const merge = <T extends { id: string }>(cur: T[], extra: T[]) => [
       ...cur,
       ...extra.filter((e) => !cur.some((c) => c.id === e.id)),
     ];
-    // v10 (auditoría de datos): los registros de la semilla se sobrescriben por id con la versión
-    // corregida y se eliminan los que no pudieron verificarse. Los registros creados desde el panel
-    // de administración (ids que no están en la semilla) se conservan.
+    // v11: actualización de URLs de YouTube verificadas en biblioteca y aclaración de prototipos
     const overlay = <T extends { id: string }>(cur: T[], seed: T[], drop: string[] = []) => {
       const byId: Record<string, T> = {};
       seed.forEach((s) => { byId[s.id] = s; });
@@ -99,7 +97,7 @@ export default function App() {
     setSuenos(() => SEED_SUENOS);
     setArte(() => SEED_ARTE);
     setTalleres((c) => merge(c, SEED_TALLERES));
-    setSeedVer(10);
+    setSeedVer(11);
   }, [seedVer, setSitios, setArticulos, setDocumentos, setRegistrosMuseo, setSuenos, setArte, setTalleres, setSeedVer]);
 
   const go = (v: View) => {

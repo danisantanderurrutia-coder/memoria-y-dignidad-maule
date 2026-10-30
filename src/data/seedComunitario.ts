@@ -22,7 +22,7 @@ export const SEED_SUENOS: HistoriaSueno[] = [
     galeria: [
       {
         url: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900&q=80',
-        caption: 'Guitarras de madera y cancioneros populares transcritos a mimeógrafo.',
+        caption: 'Guitarras de madera y cancioneros populares transcritos a mimeógrafo (imagen referencial).',
       },
       {
         url: 'https://upload.wikimedia.org/wikipedia/commons/0/04/El_hombre_de_la_guitarra%2C_La_Serena_Chile.jpg',
@@ -52,7 +52,7 @@ export const SEED_SUENOS: HistoriaSueno[] = [
       },
       {
         url: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&q=80',
-        caption: 'Campos de trigo y surcos abiertos del Maule profundo.',
+        caption: 'Campos de trigo y surcos abiertos del Maule profundo (imagen referencial).',
       },
     ],
   },
@@ -74,7 +74,7 @@ export const SEED_SUENOS: HistoriaSueno[] = [
     galeria: [
       {
         url: 'https://images.unsplash.com/photo-1513001900722-370f803f498d?w=900&q=80',
-        caption: 'Artesanías y juguetes de madera tallados a mano con dedicación.',
+        caption: 'Artesanías y juguetes de madera tallados a mano (imagen referencial).',
       },
       {
         url: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Calle_de_Talca%2C_Agust%C3%ADn_Abarca.jpg',
@@ -100,11 +100,11 @@ export const SEED_SUENOS: HistoriaSueno[] = [
     galeria: [
       {
         url: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=900&q=80',
-        caption: 'Herramientas de oficio y manos laboriosas trabajando el cuero.',
+        caption: 'Herramientas de oficio y manos laboriosas trabajando el cuero (imagen referencial).',
       },
       {
         url: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=900&q=80',
-        caption: 'Mesón de taller artesanal centenario en el casco histórico.',
+        caption: 'Mesón de taller artesanal centenario en el casco histórico (imagen referencial).',
       },
     ],
   },
@@ -126,7 +126,7 @@ export const SEED_SUENOS: HistoriaSueno[] = [
     galeria: [
       {
         url: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=900&q=80',
-        caption: 'Textiles e hilados comunitarios hechos con paciencia y memoria.',
+        caption: 'Textiles e hilados comunitarios hechos con paciencia y memoria (imagen referencial).',
       },
       {
         url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Agrupaci%C3%B3n_de_Familiares_de_Detenidos_Desaparecidos_de_Chile_%28de_Kena_Lorenzini%29.jpg/1280px-Agrupaci%C3%B3n_de_Familiares_de_Detenidos_Desaparecidos_de_Chile_%28de_Kena_Lorenzini%29.jpg',
