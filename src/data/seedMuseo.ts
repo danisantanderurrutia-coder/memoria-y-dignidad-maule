@@ -179,8 +179,8 @@ export const SEED_MUSEO: RegistroMuseo[] = [
     "fuenteUrl": "https://commons.wikimedia.org/wiki/File:Que_suene_fuerte.jpg",
     "credito": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:SrArancibbia&amp;action= (CC BY-SA 4.0)",
     "anio": "Octubre de 2019",
-    "lugar": "Barrios y villas del Maule",
-    "relato": "Durante las noches de toque de queda, familias enteras de Talca, Curicó y Linares salieron a sus balcones y esquinas a hacer resonar ollas vacías en rechazo a la militarización.",
+    "lugar": "Chile (imagen referencial, octubre de 2019)",
+    "relato": "Cacerolazo durante las movilizaciones de octubre de 2019. Imagen referencial no tomada en el Maule.",
     "audioUrl": ""
   },
   {
@@ -192,8 +192,8 @@ export const SEED_MUSEO: RegistroMuseo[] = [
     "fuenteUrl": "https://commons.wikimedia.org/wiki/File:Protestas_en_Chile_20191022_06.jpg",
     "credito": "<a href=\"//commons.wikimedia.org/wiki/User:Carlos_yo\" title=\"User:Carlos yo\">Car (CC BY-SA 4.0)",
     "anio": "Octubre de 2019",
-    "lugar": "Curicó / Talca",
-    "relato": "Las asambleas territoriales se autoconvocaron en plazas locales, elaborando pliegos de demandas regionales sobre transporte, agricultura campesina, agua y trabajo digno.",
+    "lugar": "Plaza Baquedano, Santiago (imagen referencial)",
+    "relato": "Imagen de las movilizaciones de octubre de 2019 en Plaza Baquedano (Santiago). En el Maule, las asambleas territoriales se autoconvocaron en plazas locales y elaboraron demandas sobre salud, pensiones, agua y trabajo.",
     "audioUrl": ""
   },
   {
@@ -259,19 +259,6 @@ export const SEED_MUSEO: RegistroMuseo[] = [
     "anio": "Septiembre de 1973",
     "lugar": "Prensa Nacional y Regional",
     "relato": "Primeras ediciones de prensa bajo estricta censura previa tras el golpe militar, anunciando bandos oficiales, estado de sitio y toque de queda en toda la provincia del Maule.",
-    "audioUrl": ""
-  },
-  {
-    "id": "m21",
-    "titulo": "Edición de Archivo: El Diario de Linares y Crónicas Campesinas",
-    "categoria": "Prensa",
-    "tipo": "prensa",
-    "mediaUrl": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1000&q=80",
-    "fuenteUrl": "",
-    "credito": "Archivo histórico",
-    "anio": "1970–1972",
-    "lugar": "Linares",
-    "relato": "Prensa regional cubriendo las negociaciones colectivas campesinas, la expropiación del fundo La Piedad y la conformación de asentamientos agrícolas de la CORA.",
     "audioUrl": ""
   },
   {

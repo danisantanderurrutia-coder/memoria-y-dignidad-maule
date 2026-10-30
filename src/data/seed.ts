@@ -22,9 +22,8 @@ export const SEED_SITIOS: Sitio[] = [
       { url: '', caption: 'Acceso al recinto, precordillera de Parral (imagen por digitalizar).' },
       { url: '', caption: 'Planimetría del enclave presentada en causas judiciales (documento por digitalizar).' },
     ],
-    testimonioAutor: 'Testimonio recogido de sobrevivientes (texto ilustrativo para el piloto)',
-    testimonio:
-      '«Nos decían que afuera no había nada para nosotros, que todo era pecado. Pasamos años sin saber que se podía decir que no. Hablar hoy es devolverle el nombre a quienes no pudieron hacerlo.»',
+    testimonioAutor: '',
+    testimonio: '',
     audioUrl: '',
     videoUrl: '',
     fuentes: [F_RETTIG, F_VALECH, F_INDH, F_MV],
@@ -42,9 +41,8 @@ export const SEED_SITIOS: Sitio[] = [
     resena:
       'Recinto militar utilizado tras el golpe de 1973 como lugar de detención e interrogatorio de dirigentes campesinos, sindicales, estudiantiles y de partidos de izquierda de la provincia de Linares. Los testimonios ante las comisiones de verdad describen golpes, simulacros de fusilamiento, electricidad y condiciones de hacinamiento.\n\nEl recinto figura entre los lugares de detención reconocidos por la Comisión Valech. Diversas causas judiciales por detenciones y ejecuciones en la provincia involucran a personal que operó allí.',
     galeria: [{ url: '', caption: 'Fachada del recinto militar (imagen por digitalizar).' }],
-    testimonioAutor: 'Testimonio ilustrativo — ex-dirigente campesino',
-    testimonio:
-      '«Me sacaron del fundo de madrugada. En la Escuela no preguntaban: querían los nombres de los compañeros del sindicato.»',
+    testimonioAutor: '',
+    testimonio: '',
     audioUrl: '',
     videoUrl: '',
     fuentes: [F_RETTIG, F_VALECH, F_INDH],
@@ -62,9 +60,8 @@ export const SEED_SITIOS: Sitio[] = [
     resena:
       'Unidad militar de la capital regional que, desde septiembre de 1973, funcionó como centro de reclusión, interrogatorio y tortura de detenidos de toda la provincia de Talca y localidades vecinas. El informe Valech lo incluye entre los recintos con mayor número de testimonios en la región.\n\nDe este lugar se recuerdan traslados de prisioneros hacia otros recintos y casos de detenidos desaparecidos y ejecutados políticos que son parte de causas judiciales ante la Corte de Apelaciones de Talca.',
     galeria: [{ url: '', caption: 'Frontis del Regimiento (imagen por digitalizar).' }],
-    testimonioAutor: 'Testimonio ilustrativo — sobreviviente, Talca',
-    testimonio:
-      '«Éramos estudiantes, obreros, profesoras. Lo que más recuerdo es el silencio de la ciudad mientras nos llevaban.»',
+    testimonioAutor: '',
+    testimonio: '',
     audioUrl: '',
     videoUrl: '',
     fuentes: [F_RETTIG, F_VALECH, F_INDH, F_MV],
@@ -82,9 +79,8 @@ export const SEED_SITIOS: Sitio[] = [
     resena:
       'Establecimiento penal donde permanecieron cientos de presos políticos tras ser procesados por consejos de guerra o mantenidos bajo estado de sitio. Muchas personas pasaron primero por recintos militares y luego fueron trasladadas a la cárcel, donde sufrieron hacinamiento, aislamiento y malos tratos.\n\nFamiliares y organizaciones de derechos humanos de la zona organizaron visitas, ollas comunes y gestiones legales que constituyen una de las primeras redes de solidaridad del Maule.',
     galeria: [{ url: '', caption: 'Muro exterior de la cárcel (imagen por digitalizar).' }],
-    testimonioAutor: 'Testimonio ilustrativo — familiar de preso político',
-    testimonio:
-      '«Cada domingo hacíamos fila con la canasta. A veces era la única forma de saber que seguían vivos.»',
+    testimonioAutor: '',
+    testimonio: '',
     audioUrl: '',
     videoUrl: '',
     fuentes: [F_RETTIG, F_VALECH, F_INDH],
@@ -102,9 +98,8 @@ export const SEED_SITIOS: Sitio[] = [
     resena:
       'Epicentro de las manifestaciones en Talca durante el estallido social de octubre de 2019. En la plaza y el casco céntrico se realizaron marchas multitudinarias, cacerolazos y asambleas, así como episodios de represión policial con uso de gases lacrimógenos, carros lanzaaguas y escopetas antidisturbios.\n\nEl INDH y organizaciones locales registraron querellas por apremios ilegítimos y lesiones oculares en la región. El lugar se mantiene como espacio de conmemoración y de reunión de colectivos de derechos humanos.',
     galeria: [{ url: '', caption: 'Marcha en el centro de Talca, octubre de 2019 (imagen por digitalizar).' }],
-    testimonioAutor: 'Testimonio ilustrativo — manifestante',
-    testimonio:
-      '«Volvimos a la plaza porque nuestros abuelos nos habían contado lo que pasaba cuando nadie salía.»',
+    testimonioAutor: '',
+    testimonio: '',
     audioUrl: '',
     videoUrl: '',
     fuentes: [F_INDH, F_MV],
@@ -122,8 +117,8 @@ export const SEED_SITIOS: Sitio[] = [
     resena:
       'Ubicado al interior del Cementerio Municipal de Talca, es un espacio en forma de plazoleta con pilares y estructuras de piedra, láminas de bronce y placas de mármol con los nombres de víctimas de Talca y comunas aledañas. Es un espacio de homenaje a las personas detenidas desaparecidas y ejecutadas políticas de la región. Es lugar de ofrendas, actos de conmemoración cada 11 de septiembre y 30 de agosto (Día Internacional de las Víctimas de Desapariciones Forzadas) y punto de encuentro de agrupaciones de familiares.\n\nLos memoriales son parte de las medidas de reparación simbólica recomendadas por la Comisión Rettig.',
     galeria: [{ url: '', caption: 'Muro con nombres (imagen por digitalizar).' }],
-    testimonioAutor: 'Testimonio ilustrativo — agrupación de familiares',
-    testimonio: '«Un nombre en un muro es una forma de decir: aquí estuvo, aquí lo esperamos, aquí seguimos exigiendo verdad.»',
+    testimonioAutor: '',
+    testimonio: '',
     audioUrl: '',
     videoUrl: '',
     fuentes: [F_RETTIG, F_INDH, F_MV],
@@ -141,8 +136,8 @@ export const SEED_SITIOS: Sitio[] = [
     resena:
       'Durante octubre de 2019, la plaza curicana fue lugar de concentración de marchas, cabildos y asambleas territoriales que debatieron demandas locales: salud, pensiones, agua y educación. Fue también escenario de enfrentamientos y detenciones durante el estado de emergencia.',
     galeria: [{ url: '', caption: 'Cabildo ciudadano (imagen por digitalizar).' }],
-    testimonioAutor: 'Testimonio ilustrativo — vecina de Curicó',
-    testimonio: '«En el cabildo nos escuchamos por primera vez entre vecinos. Eso nadie nos lo quita.»',
+    testimonioAutor: '',
+    testimonio: '',
     audioUrl: '',
     videoUrl: '',
     fuentes: [F_INDH],
@@ -160,8 +155,8 @@ export const SEED_SITIOS: Sitio[] = [
     resena:
       'La Reforma Agraria (leyes de 1962 y 1967) y la sindicalización campesina (Ley 16.625, 1967) transformaron el campo del Maule. Federaciones y sindicatos organizaron peticiones, huelgas y tomas de fundos, enfrentando a la histórica estructura latifundista. Tras 1973, muchos dirigentes fueron perseguidos, detenidos o desaparecidos.',
     galeria: [{ url: '', caption: 'Asamblea campesina (imagen por digitalizar).' }],
-    testimonioAutor: 'Testimonio ilustrativo — hijo de dirigente campesino',
-    testimonio: '«Mi padre decía que por primera vez el patrón tenía que sentarse a conversar de igual a igual.»',
+    testimonioAutor: '',
+    testimonio: '',
     audioUrl: '',
     videoUrl: '',
     fuentes: [F_RETTIG, F_MV],

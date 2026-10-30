@@ -74,23 +74,32 @@ export default function App() {
   const [arte, setArte] = useLocalStorage('mdm:arte', SEED_ARTE);
   const [talleres, setTalleres] = useLocalStorage('mdm:talleres', SEED_TALLERES);
 
-  const [seedVer, setSeedVer] = useLocalStorage('mdm:seedver_v9', 0);
+  const [seedVer, setSeedVer] = useLocalStorage('mdm:seedver_v10', 0);
 
   // Sincronización de migraciones en localStorage
   useEffect(() => {
-    if (seedVer >= 9) return;
+    if (seedVer >= 10) return;
     const merge = <T extends { id: string }>(cur: T[], extra: T[]) => [
       ...cur,
       ...extra.filter((e) => !cur.some((c) => c.id === e.id)),
     ];
-    setSitios((c) => merge(c, [...SEED_SITIOS_V2, ...DIGNIDAD_SITIOS]));
-    setArticulos((c) => merge(c, [...SEED_ARTICULOS_V2, ...DIGNIDAD_ARTICULOS]));
-    setDocumentos((c) => merge(c, [...SEED_DOCUMENTOS_V2, ...DIGNIDAD_DOCUMENTOS]));
-    setRegistrosMuseo((c) => merge(c, DIGNIDAD_MUSEO));
+    // v10 (auditoría de datos): los registros de la semilla se sobrescriben por id con la versión
+    // corregida y se eliminan los que no pudieron verificarse. Los registros creados desde el panel
+    // de administración (ids que no están en la semilla) se conservan.
+    const overlay = <T extends { id: string }>(cur: T[], seed: T[], drop: string[] = []) => {
+      const byId: Record<string, T> = {};
+      seed.forEach((s) => { byId[s.id] = s; });
+      const kept = cur.filter((c) => !drop.includes(c.id)).map((c) => byId[c.id] ?? c);
+      return [...kept, ...seed.filter((s) => !kept.some((k) => k.id === s.id))];
+    };
+    setSitios((c) => overlay(c, [...SEED_SITIOS, ...SEED_SITIOS_V2, ...DIGNIDAD_SITIOS], ['plaza-parral-memoria-ddhh']));
+    setArticulos((c) => overlay(c, [...SEED_ARTICULOS, ...SEED_ARTICULOS_V2, ...DIGNIDAD_ARTICULOS]));
+    setDocumentos((c) => overlay(c, [...SEED_DOCUMENTOS, ...SEED_DOCUMENTOS_V2, ...DIGNIDAD_DOCUMENTOS], ['doc-sentencia-zepeda']));
+    setRegistrosMuseo((c) => overlay(c, [...SEED_MUSEO, ...DIGNIDAD_MUSEO], ['m21']));
     setSuenos(() => SEED_SUENOS);
     setArte(() => SEED_ARTE);
     setTalleres((c) => merge(c, SEED_TALLERES));
-    setSeedVer(9);
+    setSeedVer(10);
   }, [seedVer, setSitios, setArticulos, setDocumentos, setRegistrosMuseo, setSuenos, setArte, setTalleres, setSeedVer]);
 
   const go = (v: View) => {

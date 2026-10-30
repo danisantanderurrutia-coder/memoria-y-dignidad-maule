@@ -203,10 +203,6 @@ export const SEED_SUENOS: HistoriaSueno[] = [
       'Porotos con riendas compartidos en platos enlozados, pebre bien picante con ají cacho de cabra y el golpe seco del tejo en la greda húmeda.',
     galeria: [
       {
-        url: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Olla_y_cuchara.jpg/1280px-Olla_y_cuchara.jpg',
-        caption: 'Olla común y cuchara de madera: símbolos vivos de la solidaridad popular.',
-      },
-      {
         url: 'https://upload.wikimedia.org/wikipedia/commons/3/39/Chile_-_34660_-_Cueca_dance.jpg',
         caption: 'Cueca popular campesina y celebración comunitaria en el Maule.',
       },
