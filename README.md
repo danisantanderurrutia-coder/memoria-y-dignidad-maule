@@ -1,4 +1,4 @@
-# Memoria y Dignidad Maule - Museo Digital
+# Museo Digital del Maule de la Memoria y los Derechos Humanos
 
 Plataforma digital y museo virtual interactivo orientado al rescate, divulgación y reflexión crítica sobre la memoria histórica, los derechos humanos y las expresiones culturales y comunitarias de la **Región del Maule, Chile**.
 
